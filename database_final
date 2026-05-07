@@ -1,0 +1,447 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3636
+-- Generation Time: May 07, 2026 at 07:42 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `cloudjourney_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `tour_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_phone` varchar(20) NOT NULL,
+  `customer_email` varchar(100) NOT NULL,
+  `booking_date` date NOT NULL,
+  `guests` int(11) NOT NULL DEFAULT 1,
+  `total_price` decimal(12,2) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `status` enum('pending','confirmed','cancelled') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `tour_id`, `customer_name`, `customer_phone`, `customer_email`, `booking_date`, `guests`, `total_price`, `payment_method`, `status`, `created_at`) VALUES
+(1, 9, 'anhtai', '0912781826', 'anhtai235n@gmail.com', '2026-05-07', 1, 3800000.00, 'office', 'confirmed', '2026-05-07 05:09:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_email` varchar(100) NOT NULL,
+  `message` text NOT NULL,
+  `status` enum('unread','read','replied') DEFAULT 'unread',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faqs`
+--
+
+CREATE TABLE `faqs` (
+  `id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `answer` text NOT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `order_by` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `question`, `answer`, `category`, `order_by`, `created_at`, `updated_at`) VALUES
+(1, 'CloudJourney là gì?', 'CloudJourney là nền tảng đặt tour trực tuyến hàng đầu ở Việt Nam, cung cấp các gói tour du lịch chất lượng cao với giá tốt nhất.', 'Giới thiệu', 1, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(2, 'Làm sao để đặt tour?', 'Bạn chỉ cần vào trang chi tiết tour, chọn ngày đi, số lượng khách, và tiến hành thanh toán. Sau đó đội ngũ của chúng tôi sẽ liên hệ xác nhận.', 'Đặt tour', 1, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(3, 'Có thể hủy tour không?', 'Bạn có thể hủy tour theo chính sách hủy của tour đó. Thông thường hủy trước 7-10 ngày sẽ hoàn 100% tiền.', 'Hủy tour', 2, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(4, 'Hỗ trợ bao lâu?', 'Đội hỗ trợ của CloudJourney luôn sẵn sàng 24/7 để trả lời mọi câu hỏi của bạn.', 'Hỗ trợ', 1, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(5, 'Tour có bao gồm ăn uống không?', 'Tùy vào tour. Hầu hết tour đều bao gồm ăn sáng, trưa, tối. Xem phần \"Bao gồm\" trong chi tiết tour.', 'Chi tiết tour', 3, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(6, 'Có giảm giá cho nhóm lớn không?', 'Có. Nhóm từ 10 người trở lên sẽ nhận được giảm giá đặc biệt. Liên hệ 0901234567 để được báo giá.', 'Giá tiền', 2, '2026-04-20 14:44:22', '2026-04-20 14:44:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `slug` varchar(200) NOT NULL,
+  `content` longtext NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `keywords` varchar(255) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  `status` enum('published','draft') DEFAULT 'draft',
+  `views` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `slug`, `content`, `description`, `keywords`, `image_url`, `author_id`, `status`, `views`, `created_at`, `updated_at`) VALUES
+(1, 'Top 5 điểm đến không nên bỏ lỡ ở Việt Nam', 'top-5-diem-den-khong-nen-bo-lo-o-viet-nam', 'Việt Nam có rất nhiều điểm đến tuyệt vời. Trong bài viết này, chúng tôi sẽ gợi ý 5 điểm đến mà bạn không nên bỏ lỡ: 1. Vịnh Hạ Long - Di sản thiên nhiên thế giới...', 'Khám phá 5 điểm đến đẹp nhất Việt Nam mà bạn nên ghé thăm', 'du lịch, Việt Nam, điểm đến, vịnh Hạ Long, Sapa', 'uploads/picture1.jfif', 1, 'published', 0, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(2, 'Hướng dẫn chuẩn bị cho chuyến du lịch dài ngày', 'huong-dan-chuan-bi-cho-chuyen-du-lich-dai-ngay', 'Đi du lịch lâu ngày cần chuẩn bị kỹ lưỡng. Dưới đây là những điều bạn cần chuẩn bị: 1. Giấy tờ và tài liệu... 2. Hành lý...', 'Những thứ cần chuẩn bị trước khi đi du lịch dài ngày', 'du lịch, chuẩn bị, hành lý, giấy tờ', 'uploads/picture2.jfif', 1, 'published', 0, '2026-04-20 14:44:22', '2026-04-20 14:44:22'),
+(3, 'CloudJourney ký hợp tác với 50 khách sạn 5 sao trên toàn quốc', 'cloudjourney-ky-hop-tac-voi-50-khach-san-5-sao', 'CloudJourney vui mừng thông báo đã ký hợp tác với 50 khách sạn 5 sao trên toàn quốc. Điều này sẽ giúp khách hàng...', 'CloudJourney mở rộng hợp tác khách sạn 5 sao', 'CloudJourney, khách sạn, hợp tác, du lịch', 'uploads/picture3.jfif', 1, 'published', 0, '2026-04-20 14:44:22', '2026-04-20 14:44:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news_comments`
+--
+
+CREATE TABLE `news_comments` (
+  `id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `status` enum('pending','approved','rejected') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_settings`
+--
+
+CREATE TABLE `site_settings` (
+  `setting_key` varchar(50) NOT NULL,
+  `setting_value` text DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `site_settings`
+--
+
+INSERT INTO `site_settings` (`setting_key`, `setting_value`, `description`) VALUES
+('company_address', 'Đại học Bách Khoa, TP.HCM', 'Địa chỉ'),
+('company_email', 'support@cloudjourney.vn', 'Email liên hệ'),
+('company_phone', '0901234567', 'Số điện thoại'),
+('hero_image', 'uploads/picture1.jfif', 'Ảnh nền banner'),
+('hero_title', 'Khám phá hành trình tuyệt vời của bạn', 'Tiêu đề banner'),
+('site_name', 'CloudJourney', 'Tên website');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tours`
+--
+
+CREATE TABLE `tours` (
+  `id` int(11) NOT NULL,
+  `tour_code` varchar(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `duration` varchar(50) DEFAULT NULL,
+  `location` varchar(100) DEFAULT NULL,
+  `status` enum('active','hidden') DEFAULT 'active',
+  `image_url` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `highlights` text DEFAULT NULL,
+  `itinerary` text DEFAULT NULL,
+  `policy` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tours`
+--
+
+INSERT INTO `tours` (`id`, `tour_code`, `name`, `category`, `price`, `duration`, `location`, `status`, `image_url`, `description`, `highlights`, `itinerary`, `policy`, `created_at`) VALUES
+(1, 'CJ-VN-001', 'Khám Phá Vịnh Hạ Long - Du Thuyền 5 Sao', 'Nghỉ dưỡng', 2500000.00, '2 Ngày 1 Đêm', 'Hạ Long, Việt Nam', 'active', 'uploads/Ha Long Bay Vietnam.jfif', 'Trải nghiệm một đêm trên du thuyền sang trọng tại Vịnh Hạ Long, di sản thiên nhiên thế giới. Thưởng thức hải sản tươi ngon, chèo kayak và khám phá hang Sửng Sốt.', 'Ngủ đêm trên du thuyền 5 sao\r\nTham quan hang Sửng Sốt\r\nChèo thuyền kayak tại khu vực Hang Luồn\r\nLớp học nấu ăn và tiệc Sunset Party', 'Ngày 1: Hà Nội - Hạ Long, nhận phòng du thuyền, ăn trưa, chèo kayak.\r\nNgày 2: Thăm hang Sửng Sốt, ăn sáng, trả phòng, về Hà Nội.', 'Hủy trước 7 ngày hoàn 100%. Hủy trong vòng 7 ngày không hoàn tiền.', '2026-04-15 14:50:53'),
+(2, 'CJ-VN-002', 'Chinh Phục Fansipan - Sapa Mùa Mây', 'Khám phá', 3200000.00, '3 Ngày 2 Đêm', 'Sapa, Việt Nam', 'active', 'uploads/sapa.jpg', 'Hành trình chinh phục nóc nhà Đông Dương và khám phá vẻ đẹp hùng vĩ của Sapa. Tham quan bản Cát Cát, thưởng thức đặc sản núi rừng và săn mây.', 'Chinh phục đỉnh Fansipan bằng cáp treo\nTham quan bản Cát Cát của người H\'Mông\nCheck-in tại Cổng Trời Ô Quy Hồ\nThưởng thức lẩu cá tầm', 'Ngày 1: Hà Nội - Sapa, check-in khách sạn.\nNgày 2: Chinh phục Fansipan, thăm nhà thờ Đá.\nNgày 3: Tham quan bản Cát Cát, mua sắm, về Hà Nội.', 'Hủy trước 10 ngày hoàn 100%. Hủy trong vòng 10 ngày phạt 50%.', '2026-04-15 14:50:53'),
+(3, 'CJ-VN-003', 'Đà Nẵng - Hội An - Bà Nà Hills', 'Giải trí', 4500000.00, '4 Ngày 3 Đêm', 'Đà Nẵng, Việt Nam', 'active', 'uploads/danang.jpg', 'Khám phá thành phố đáng sống nhất Việt Nam với bãi biển Mỹ Khê, Cầu Vàng, và phố cổ Hội An lung linh về đêm.', 'Vui chơi tại Bà Nà Hills và Cầu Vàng\nĐi dạo phố cổ Hội An\nTắm biển Mỹ Khê\nThưởng thức ẩm thực Đà Nẵng', 'Ngày 1: Đến Đà Nẵng, tắm biển.\nNgày 2: Khám phá Bà Nà Hills.\nNgày 3: Ngũ Hành Sơn, Phố cổ Hội An.\nNgày 4: Mua sắm, ra sân bay.', 'Chính sách hủy linh hoạt, vui lòng liên hệ để biết chi tiết.', '2026-04-15 14:50:53'),
+(4, 'CJ-VN-004', 'Đà Lạt - Thành Phố Ngàn Hoa', 'Nghỉ dưỡng', 2800000.00, '3 Ngày 2 Đêm', 'Đà Lạt, Việt Nam', 'active', 'uploads/dalat.jpg', 'Tận hưởng không khí se lạnh và vẻ đẹp lãng mạn của Đà Lạt. Tham quan các vườn hoa, thác nước và thưởng thức cà phê phố núi.', 'Săn mây tại Đồi chè Cầu Đất\nTham quan vườn hoa thành phố\nCheck-in tại quảng trường Lâm Viên\nThưởng thức ẩm thực chợ đêm Đà Lạt', 'Ngày 1: Đến Đà Lạt, nhận phòng, tự do khám phá.\nNgày 2: Tham quan các điểm nổi tiếng: Thác Datanla, Vườn hoa, Dinh Bảo Đại.\nNgày 3: Mua sắm đặc sản, ra sân bay.', 'Hủy trước 5 ngày hoàn 100%.', '2026-04-15 14:50:53'),
+(5, 'CJ-VN-005', 'Phú Quốc - Thiên Đường Biển Đảo', 'Nghỉ dưỡng', 5500000.00, '4 Ngày 3 Đêm', 'Phú Quốc, Việt Nam', 'active', 'uploads/Phu Quoc.jfif', 'Thư giãn trên những bãi biển cát trắng mịn, lặn ngắm san hô và khám phá các hòn đảo hoang sơ tại Phú Quốc.', 'Lặn ngắm san hô tại Hòn Thơm\r\nTham quan nhà tù Phú Quốc\r\nThư giãn tại Bãi Sao\r\nVui chơi tại VinWonders', 'Ngày 1: Đến Phú Quốc, nhận phòng.\r\nNgày 2: Tour 4 đảo, lặn ngắm san hô.\r\nNgày 3: Khám phá Bắc đảo: VinWonders, Safari.\r\nNgày 4: Tự do, ra sân bay.', 'Hủy trước 15 ngày hoàn 100%. Hủy trong vòng 15 ngày phạt 30%.', '2026-04-15 14:50:53'),
+(6, 'CJ-QT-001', 'Hàn Quốc Mùa Thu: Seoul - Nami - Everland', 'Văn hóa', 15990000.00, '5 Ngày 4 Đêm', 'Hàn Quốc', 'active', 'uploads/download (1).jfif', 'Đắm chìm trong sắc lá đỏ lãng mạn của mùa thu Hàn Quốc. Khám phá cung điện Gyeongbok, đảo Nami và công viên giải trí Everland.', 'Mặc Hanbok chụp ảnh tại cung điện Gyeongbok\r\nĐi dạo trên đảo Nami lãng mạn\r\nThỏa sức vui chơi tại Everland\r\nShopping tại Myeongdong', 'Ngày 1: Bay đến Seoul.\r\nNgày 2: Tham quan cung điện, làng cổ Bukchon.\r\nNgày 3: Khám phá đảo Nami.\r\nNgày 4: Vui chơi tại Everland, mua sắm.\r\nNgày 5: Ra sân bay về Việt Nam.', 'Yêu cầu có visa Hàn Quốc. Không hoàn hủy sau khi đã đặt.', '2026-04-15 14:50:53'),
+(7, 'CJ-QT-002', 'Nhật Bản Mùa Hoa Anh Đào: Tokyo - Kyoto - Osaka', 'Văn hóa', 35500000.00, '7 Ngày 6 Đêm', 'Nhật Bản', 'active', 'uploads/download.jfif', 'Hành trình ngắm hoa anh đào nở rộ trên khắp các thành phố nổi tiếng của Nhật Bản. Trải nghiệm văn hóa độc đáo và ẩm thực tinh tế.', 'Ngắm hoa anh đào tại công viên Ueno\r\nTham quan chùa Vàng Kinkaku-ji ở Kyoto\r\nTrải nghiệm tàu Shinkansen\r\nKhám phá khu Dotonbori ở Osaka', 'Ngày 1-2: Tokyo, núi Phú Sĩ.\r\nNgày 3-4: Di chuyển đến Kyoto, tham quan chùa chiền.\r\nNgày 5-6: Khám phá Osaka, Nara.\r\nNgày 7: Bay về Việt Nam.', 'Yêu cầu có visa Nhật Bản. Không hoàn hủy sau khi đã đặt.', '2026-04-15 14:50:53'),
+(8, 'CJ-QT-003', 'Thái Lan: Bangkok - Pattaya - Chợ Nổi', 'Giải trí', 6990000.00, '5 Ngày 4 Đêm', 'Thái Lan', 'active', 'uploads/Bangkok Travel Guide 2026_ Explore Thailand’s Capital City.jfif', 'Khám phá sự sôi động của Bangkok và vẻ đẹp của thành phố biển Pattaya. Thưởng thức show diễn, mua sắm và các món ăn đường phố.', 'Tham quan Cung điện Hoàng Gia Thái Lan\r\nĐi thuyền trên sông Chao Phraya\r\nXem Alcazar Show tại Pattaya\r\nKhám phá chợ nổi Damnoen Saduak', 'Ngày 1: Đến Bangkok, di chuyển đến Pattaya.\r\nNgày 2: Đảo san hô Coral, xem show.\r\nNgày 3: Về Bangkok, tham quan chùa.\r\nNgày 4: Chợ nổi, tự do mua sắm.\r\nNgày 5: Ra sân bay về Việt Nam.', 'Giá tour không bao gồm chi phí cá nhân. Hủy trước 10 ngày hoàn 70%.', '2026-04-15 14:50:53'),
+(9, 'CJ-VN-006', 'Hà Giang - Cung Đường Hạnh Phúc', 'Khám phá', 3800000.00, '4 Ngày 3 Đêm', 'Hà Giang, Việt Nam', 'active', 'uploads/Dốc 9 khoanh Hà Giang.jfif', 'Chinh phục những cung đường đèo hiểm trở và hùng vĩ nhất Việt Nam. Ngắm nhìn sông Nho Quế và cột cờ Lũng Cú.', 'Chinh phục đèo Mã Pí Lèng\r\nĐi thuyền trên sông Nho Quế\r\nCheck-in Cột cờ Lũng Cú\r\nTham quan Dinh thự họ Vương', 'Ngày 1: Hà Nội - Hà Giang.\r\nNgày 2: Quản Bạ - Yên Minh - Đồng Văn.\r\nNgày 3: Lũng Cú - Mã Pí Lèng - Mèo Vạc.\r\nNgày 4: Mèo Vạc - Hà Nội.', 'Tour mạo hiểm, yêu cầu sức khỏe tốt.', '2026-04-15 14:50:53'),
+(10, 'CJ-VN-007', 'Miền Tây Sông Nước: Cần Thơ - Châu Đốc', 'Văn hóa', 2200000.00, '2 Ngày 1 Đêm', 'Miền Tây, Việt Nam', 'active', 'uploads/poster Cần Thơ.jfif', 'Trải nghiệm cuộc sống sông nước đặc trưng của miền Tây. Đi chợ nổi, nghe đờn ca tài tử và thưởng thức trái cây tại vườn.', 'Đi chợ nổi Cái Răng\r\nTham quan miếu Bà Chúa Xứ\r\nThưởng thức trái cây tại vườn\r\nNghe đờn ca tài tử trên sông', 'Ngày 1: Sài Gòn - Cần Thơ, tham quan nhà cổ, bến Ninh Kiều.\r\nNgày 2: Đi chợ nổi Cái Răng, đến Châu Đốc, về lại Sài Gòn.', 'Tour khởi hành cuối tuần.', '2026-04-15 14:50:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_images`
+--
+
+CREATE TABLE `tour_images` (
+  `id` int(11) NOT NULL,
+  `tour_id` int(11) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `is_primary` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_ratings`
+--
+
+CREATE TABLE `tour_ratings` (
+  `id` int(11) NOT NULL,
+  `tour_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rating` decimal(3,1) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tour_ratings`
+--
+
+INSERT INTO `tour_ratings` (`id`, `tour_id`, `user_id`, `rating`, `comment`, `created_at`) VALUES
+(1, 9, 3, 5.0, 'vui', '2026-05-07 05:09:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `role` enum('admin','member') DEFAULT 'member',
+  `status` enum('active','banned') DEFAULT 'active',
+  `avatar` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `phone` varchar(20) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `bio` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `email`, `role`, `status`, `avatar`, `created_at`, `phone`, `address`, `bio`) VALUES
+(1, 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin@cloudjourney.vn', 'admin', 'active', NULL, '2026-04-15 14:50:53', NULL, NULL, NULL),
+(2, 'admin2', '$2y$10$5ZuQDaKzw1bIRDhO9D.c5efyHYVTOHwag0fQbl4vT/ofQG/B/9Jwq', 'anhtai', 'anhtai@gmail.com', 'admin', 'active', NULL, '2026-05-07 05:07:44', NULL, NULL, NULL),
+(3, 'tai', '$2y$10$wKJPULVCcge2RHgLPtDQxeKY.GdHzHkySdDrYvdjs8KPydlURPtxu', 'anhtai', 'anhhtaii@gmail.com', 'member', 'active', NULL, '2026-05-07 05:08:58', NULL, NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tour_id` (`tour_id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_category` (`category`),
+  ADD KEY `idx_order` (`order_by`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `author_id` (`author_id`),
+  ADD KEY `idx_status` (`status`),
+  ADD KEY `idx_created` (`created_at`);
+ALTER TABLE `news` ADD FULLTEXT KEY `idx_search` (`title`,`content`);
+
+--
+-- Indexes for table `news_comments`
+--
+ALTER TABLE `news_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `idx_news` (`news_id`),
+  ADD KEY `idx_status` (`status`);
+
+--
+-- Indexes for table `site_settings`
+--
+ALTER TABLE `site_settings`
+  ADD PRIMARY KEY (`setting_key`);
+
+--
+-- Indexes for table `tours`
+--
+ALTER TABLE `tours`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tour_code` (`tour_code`);
+
+--
+-- Indexes for table `tour_images`
+--
+ALTER TABLE `tour_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tour_id` (`tour_id`);
+
+--
+-- Indexes for table `tour_ratings`
+--
+ALTER TABLE `tour_ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_rating` (`tour_id`,`user_id`),
+  ADD KEY `idx_tour` (`tour_id`),
+  ADD KEY `idx_user` (`user_id`),
+  ADD KEY `idx_rating` (`rating`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `news_comments`
+--
+ALTER TABLE `news_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tours`
+--
+ALTER TABLE `tours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tour_images`
+--
+ALTER TABLE `tour_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tour_ratings`
+--
+ALTER TABLE `tour_ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `news_comments`
+--
+ALTER TABLE `news_comments`
+  ADD CONSTRAINT `news_comments_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `news_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tour_images`
+--
+ALTER TABLE `tour_images`
+  ADD CONSTRAINT `tour_images_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tour_ratings`
+--
+ALTER TABLE `tour_ratings`
+  ADD CONSTRAINT `tour_ratings_ibfk_1` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tour_ratings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
