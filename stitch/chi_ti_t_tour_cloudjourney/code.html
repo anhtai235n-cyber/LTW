@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vịnh Hạ Long Kỳ Thú | CloudJourney</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#59dad1",
+              "primary": "#003d9b",
+              "background": "#faf8ff",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "outline": "#737685",
+              "on-tertiary-container": "#67e6dd",
+              "secondary-fixed-dim": "#ffb59c",
+              "on-tertiary-fixed-variant": "#00504c",
+              "error-container": "#ffdad6",
+              "tertiary": "#004c48",
+              "on-primary-fixed-variant": "#0040a2",
+              "surface-container": "#ededf8",
+              "on-background": "#191b23",
+              "inverse-surface": "#2e3038",
+              "inverse-on-surface": "#f0f0fb",
+              "secondary-container": "#fe7e4f",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d9d9e4",
+              "on-primary-fixed": "#001848",
+              "on-secondary-container": "#6b1f00",
+              "on-error": "#ffffff",
+              "surface-tint": "#0c56d0",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e7e7f2",
+              "on-primary-container": "#c4d2ff",
+              "outline-variant": "#c3c6d6",
+              "primary-container": "#0052cc",
+              "surface-bright": "#faf8ff",
+              "surface-container-highest": "#e1e2ec",
+              "tertiary-container": "#006661",
+              "on-surface": "#191b23",
+              "secondary-fixed": "#ffdbcf",
+              "tertiary-fixed": "#79f6ed",
+              "secondary": "#a43c12",
+              "primary-fixed": "#dae2ff",
+              "on-tertiary-fixed": "#00201e",
+              "surface": "#faf8ff",
+              "primary-fixed-dim": "#b2c5ff",
+              "on-secondary-fixed-variant": "#822800",
+              "surface-container-low": "#f3f3fd",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b2c5ff",
+              "on-surface-variant": "#434654",
+              "surface-variant": "#e1e2ec",
+              "on-secondary-fixed": "#380c00"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+<div class="text-2xl font-bold tracking-tight text-primary">CloudJourney</div>
+<div class="hidden md:flex items-center space-x-8 font-headline font-medium text-sm">
+<a class="text-slate-600 hover:text-primary transition-all duration-300" href="#">Khám phá</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Điểm đến</a>
+<a class="text-slate-600 hover:text-primary transition-all duration-300" href="#">Hành trình</a>
+<a class="text-slate-600 hover:text-primary transition-all duration-300" href="#">Liên hệ</a>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-all">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-all">account_circle</span>
+<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-xl font-headline font-semibold text-sm hover:opacity-90 transition-transform active:scale-95">Đăng nhập</button>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 pt-28 pb-20">
+<!-- Breadcrumbs -->
+<nav class="flex items-center space-x-2 text-sm text-on-surface-variant mb-6 font-medium">
+<a class="hover:text-primary" href="#">Trang chủ</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Điểm đến</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary">Vịnh Hạ Long</span>
+</nav>
+<!-- Header Section -->
+<div class="mb-8">
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold text-primary tracking-tight mb-4">Vịnh Hạ Long Kỳ Thú</h1>
+<div class="flex flex-wrap items-center gap-6">
+<div class="flex items-center text-secondary font-bold">
+<span class="material-symbols-outlined mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9 (120 đánh giá)</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-1">location_on</span>
+<span>Quảng Ninh, Việt Nam</span>
+</div>
+</div>
+</div>
+<!-- Bento Photo Gallery -->
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[300px] md:h-[500px] mb-12">
+<div class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl group">
+<img alt="Halong Bay" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Wide panoramic aerial view of majestic limestone karsts rising from emerald waters in Ha Long Bay during sunrise with traditional junk boats" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6MmYcIlvFAHM3MFfhuJY6Dxnbbz0QYgulYM0ukXv-lG-K0QLEmqzUYmkdclO0ARpZNIHW6Swf-NYIuIbafovLrTt5y5w9-yLF9nyPYLliIKtgpv83jYyj6pmOEmfO1AdpSDYJ858VwQ0wfY6njJCS1BEDDOGwetsB7mkEw1x7JNEXPxLVQc1-VSQbvm-1rn_tbiu0uj4pbFj0lM_muj7DmAnwRkZac9V0xsTe-JPPAyvpy7hEZym2UZs3Liahqolgbz1x2szSveo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<div class="hidden md:block md:col-span-1 overflow-hidden rounded-2xl group">
+<img alt="Halong Bay Cave" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Interior of a massive limestone cave in Ha Long Bay with colorful lighting illuminating stalactites and stalagmites" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDoG1tJezJCiehy59-7v1qgFVXajd1xziWRZPjF-3Pb3BLqcPXHb2nDlBsOh4ZBmkf4JKPA23In6-EGnKP2pMqK4sltkwGPnLahge4yWK5P3_lVvpwdZB4aYuv3bQWHBUX-4cNGmNuCF7zHv1yw_Ij7Wa8Co69iK5x6XdZV566LbszpmS2Aj8IuzqfZGXQqWGdkSyEvLz0-eiDQed_x2MMmZONwP9dq-x2roeAmpAKoo3KMcfmIM5UnnPTlTQ_DQJMHClBlxSrB7g"/>
+</div>
+<div class="hidden md:block md:col-span-1 overflow-hidden rounded-2xl group">
+<img alt="Halong Bay Sunset" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of a luxury cruise ship deck overlooking the peaceful bay at sunset with orange and purple sky reflecting on water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATHHDAS70kQvCz9vNlBA45HUKcI0zm7YHmbvn1D3loglGm9miorB9zA5Xv9I_wXPTikQyTA7vFPy8kTPTniPhNPnKpVcboK5MEe--2VrNQz6vuTHcXulzR5-5jwzZ3WXOBay1X_8zkLzjOe2UdX5PyueWRdd6icSnZmFQ-2b3SMQ1c2el_cRdJe0USYa6iz4sgZL4wpthhdNJGY75SdWQ80DiytksZHjbqEvJ5km9I6aiOjXH8R_8HPY3asE2Cpjmvg6_wUB3zS0Q"/>
+</div>
+<div class="hidden md:block md:col-span-2 overflow-hidden rounded-2xl group relative">
+<img alt="Halong Bay Kayak" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Two people kayaking through a narrow sea arch between limestone mountains in crystalline turquoise waters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvFzbPbT1-SUDE9cUyJN3RqiSRpkn3-6aN5JyYJPVysJYv6jU9S5Frz4tsDFtbSOm1JdjnKFO_ys7Dfd_GTX5Cu7nZZ3x122fDmJoUC4eqR3lr72pHIkpDLt9mtK8AKC68Y7ORTjBK0N3BktnsZbL3HnimH3iQdQ9akj7dm_ajpqEOkcPlYS3qFhAX-YHMTDRV9LmZWiKWArySgX2E5oWqAKH8rfe6r8qIPIWVePwJ_hDmBXfqxQ9d2tOTKcynV_3fvfQeKiQ1o-E"/>
+<button class="absolute bottom-4 right-4 bg-surface-container-lowest text-primary px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:bg-primary hover:text-on-primary transition-colors">Xem tất cả ảnh</button>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Left Column: Content -->
+<div class="lg:w-2/3">
+<!-- Overview -->
+<section class="mb-12">
+<h2 class="text-2xl font-headline font-bold text-primary mb-6">Về tour này</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg mb-6">
+                        Khám phá vẻ đẹp kỳ ảo của Di sản Thiên nhiên Thế giới Vịnh Hạ Long trong hành trình 3 ngày 2 đêm trên du thuyền hạng sang. Từ những hang động đá vôi nghìn năm tuổi đến những bãi cát trắng mịn màng tại Đảo Ti Tốp, mỗi khoảnh khắc sẽ là một kỷ niệm khó quên. Trải nghiệm chèo thuyền Kayak, thưởng thức hải sản tươi sống và ngắm hoàng hôn rực rỡ trên boong tàu.
+                    </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 rounded-2xl text-center">
+<span class="material-symbols-outlined text-primary mb-2">schedule</span>
+<p class="text-xs text-on-surface-variant">Thời gian</p>
+<p class="font-bold">3 Ngày 2 Đêm</p>
+</div>
+<div class="bg-surface-container p-4 rounded-2xl text-center">
+<span class="material-symbols-outlined text-primary mb-2">group</span>
+<p class="text-xs text-on-surface-variant">Số lượng</p>
+<p class="font-bold">Tối đa 20 người</p>
+</div>
+<div class="bg-surface-container p-4 rounded-2xl text-center">
+<span class="material-symbols-outlined text-primary mb-2">language</span>
+<p class="text-xs text-on-surface-variant">Ngôn ngữ</p>
+<p class="font-bold">Tiếng Việt/Anh</p>
+</div>
+<div class="bg-surface-container p-4 rounded-2xl text-center">
+<span class="material-symbols-outlined text-primary mb-2">verified</span>
+<p class="text-xs text-on-surface-variant">Dịch vụ</p>
+<p class="font-bold">Hạng Sang</p>
+</div>
+</div>
+</section>
+<!-- Itinerary -->
+<section class="mb-12">
+<h2 class="text-2xl font-headline font-bold text-primary mb-8">Lịch trình chi tiết</h2>
+<div class="space-y-8 relative before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-high">
+<!-- Day 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary border-4 border-surface ring-2 ring-primary-container z-10"></div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<h3 class="text-xl font-headline font-bold text-primary mb-3">Ngày 1: Hà Nội - Hạ Long - Hang Sửng Sốt</h3>
+<p class="text-on-surface-variant text-sm mb-4">Khởi hành từ Hà Nội, check-in du thuyền và thưởng thức bữa trưa giữa vịnh. Buổi chiều tham quan Hang Sửng Sốt - hang động lớn nhất Vịnh Hạ Long.</p>
+<ul class="space-y-2 text-sm">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 08:30 Đón khách tại điểm hẹn</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 12:30 Nhận phòng trên du thuyền</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 15:00 Tham quan Hang Sửng Sốt</li>
+</ul>
+</div>
+</div>
+<!-- Day 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary border-4 border-surface ring-2 ring-primary-container z-10"></div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<h3 class="text-xl font-headline font-bold text-primary mb-3">Ngày 2: Đảo Ti Tốp - Chèo Kayak tại Hang Luồn</h3>
+<p class="text-on-surface-variant text-sm mb-4">Chinh phục đỉnh Ti Tốp ngắm toàn cảnh vịnh, sau đó tự do chèo thuyền Kayak khám phá vẻ đẹp yên bình của Hang Luồn.</p>
+<ul class="space-y-2 text-sm">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 06:30 Tập Thái Cực Quyền trên boong</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 09:00 Leo núi tại Đảo Ti Tốp</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 14:00 Chèo thuyền Kayak</li>
+</ul>
+</div>
+</div>
+<!-- Day 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary border-4 border-surface ring-2 ring-primary-container z-10"></div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<h3 class="text-xl font-headline font-bold text-primary mb-3">Ngày 3: Làng chài Ba Hang - Hà Nội</h3>
+<p class="text-on-surface-variant text-sm mb-4">Ghé thăm làng chài cổ, tìm hiểu cuộc sống ngư dân trước khi quay về bến tàu và kết thúc hành trình.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Booking Form -->
+<div class="lg:w-1/3">
+<div class="sticky top-28 bg-surface-container-lowest p-8 rounded-2xl shadow-xl border border-outline-variant/5">
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="text-sm text-on-surface-variant font-medium">Giá từ</p>
+<p class="text-3xl font-headline font-extrabold text-primary">3.500.000đ</p>
+</div>
+<p class="text-sm text-on-surface-variant mb-1">/người</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">Chọn ngày khởi hành</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary/40 appearance-none" type="date" value="2024-12-25"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant pointer-events-none">calendar_today</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-primary uppercase tracking-wider mb-2">Số lượng khách</label>
+<div class="flex items-center justify-between bg-surface-container-high rounded-xl p-2">
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-lowest rounded-lg hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-bold text-lg">02</span>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-lowest rounded-lg hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-container-high">
+<div class="flex justify-between items-center mb-6">
+<span class="font-bold">Tổng tiền:</span>
+<span class="text-2xl font-headline font-extrabold text-secondary">7.000.000đ</span>
+</div>
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-2xl font-headline font-bold text-lg shadow-lg shadow-primary/20 hover:opacity-95 transition-all active:scale-[0.98]">
+                                Đặt ngay
+                            </button>
+</div>
+<p class="text-center text-xs text-on-surface-variant">Không cần thanh toán ngay • Đảm bảo giá tốt nhất</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Similar Tours Section -->
+<section class="mt-20">
+<h2 class="text-3xl font-headline font-bold text-primary mb-10">Những chuyến đi tương tự</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5">
+<img alt="Sapa" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Lush green rice terraces in Sapa valley under soft morning mist with traditional wooden ethnic village houses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4brsnWLamoLHe_-ZSYc6F2kOioe4oIZAiRNGGRMbqFmM66H9AboC306rpZZvsYEdwHnAwFOtG0hHoX3O09_mCIfsuQ0Abto7sUXrA7M6WVrB00-qyuTJYMuSVopN7lUiWW8dvOJkVlDNOyrEBGdcQJlgEHx9gXcwPAAYPU1Pnq_PVXTsAIlF5e9diI5xPvDZfb5QsfR3Rmjq7rcjsYAAbvhHYl4eTqR6udvj7JVNnT6IufqN68FU3yInGEC0SgrV299KPTGFUvvQ"/>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest">Núi Rừng</span>
+<div class="flex items-center text-secondary text-sm font-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.8
+                        </div>
+</div>
+<h3 class="text-lg font-headline font-bold mb-4 group-hover:text-primary transition-colors">Sapa - Bản Cát Cát &amp; Phan Xi Păng</h3>
+<p class="text-primary font-extrabold">2.850.000đ</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5">
+<img alt="Ninh Binh" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Small traditional boat floating on a river winding through limestone mountains and yellow rice fields in Tam Coc, Ninh Binh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkvMKP9O3W6QSY64mH_Hv5LqiIXMYcDNXEMIGzO3msqu435s9XvHZwBsU6gJX5qvEoJz-fS_JUpCnFHLCv0vtZXE5zwr7VvsAB0et_tvpXzc9XU3TcPWAICRDkq1T2CrBDDgHnoS9_ntt-S4DT0qONJwNzouS9XsiOBdF7j7iXA6RyVC2quAV-PmAIqUJsBT7BttEAB3qlQFY10v1A4zjgwWMG3YfeZvxmYNHT94XBFiFg6AstIeg7xQxrqcyfGE76clEK4p5co1E"/>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest">Di Sản</span>
+<div class="flex items-center text-secondary text-sm font-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                        </div>
+</div>
+<h3 class="text-lg font-headline font-bold mb-4 group-hover:text-primary transition-colors">Tràng An - Bái Đính 2 Ngày 1 Đêm</h3>
+<p class="text-primary font-extrabold">1.950.000đ</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+<div class="aspect-[4/3] rounded-xl overflow-hidden mb-5">
+<img alt="Da Nang" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Golden Bridge in Ba Na Hills supported by two giant stone hands overlooking the lush forest and misty mountains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Dx6lh9BkmY6nzmE7KMRfNldXneJpjdm3hLZ4jyzpQogfOFLnZ6gvILym5KbcZRIxG5vLPHmBJnkFdxtvIc6o1KQ_3qe6H1_dxdliZEv7gD04eYuxOMYHtu9yO3I2FyyhD13YxweV85HNRCr1R_f0HzWhWen3F5nGdZ8CLh-e9BKxnrxVPcYoVcvZsSw3U6MmxHIuTOCpNQor5CWQqonJSOZBqOj7udlSAUOZO5Oqmv5t4E9X4tTjClZmiyzsPbqA-1NogdlnFkg"/>
+</div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest">Nghỉ Dưỡng</span>
+<div class="flex items-center text-secondary text-sm font-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.7
+                        </div>
+</div>
+<h3 class="text-lg font-headline font-bold mb-4 group-hover:text-primary transition-colors">Đà Nẵng - Hội An - Bà Nà Hills</h3>
+<p class="text-primary font-extrabold">4.200.000đ</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container w-full pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-1">
+<div class="text-xl font-bold text-primary mb-4">CloudJourney</div>
+<p class="text-slate-500 text-sm leading-relaxed mb-6">Trải nghiệm hành trình không giới hạn với những dịch vụ du lịch hàng đầu Việt Nam.</p>
+<div class="flex space-x-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80">share_location</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80">alternate_email</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6">Công ty</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-secondary-container transition-colors" href="#">Về chúng tôi</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Tuyển dụng</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Tin tức</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6">Hỗ trợ</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-secondary-container transition-colors" href="#">Chính sách bảo mật</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Điều khoản sử dụng</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Liên hệ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6">Liên hệ</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> contact@cloudjourney.vn</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">phone</span> 1900 1234</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> Hà Nội, Việt Nam</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-outline-variant/20 text-center text-sm text-slate-400">
+            © 2024 CloudJourney. Trải nghiệm hành trình không giới hạn.
+        </div>
+</footer>
+</body></html>

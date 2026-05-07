@@ -1,6 +1,6 @@
 <?php
 class Database {
-    private $host = "localhost";
+    private $host = "127.0.0.1;port=3636";
     private $db_name = "cloudjourney_db"; // Tên database bạn tạo trong Workbench
     private $username = "root";
     private $password = ""; // Mặc định XAMPP để trống

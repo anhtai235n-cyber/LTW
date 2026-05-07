@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#59dad1",
+              "primary": "#003d9b",
+              "background": "#faf8ff",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "outline": "#737685",
+              "on-tertiary-container": "#67e6dd",
+              "secondary-fixed-dim": "#ffb59c",
+              "on-tertiary-fixed-variant": "#00504c",
+              "error-container": "#ffdad6",
+              "tertiary": "#004c48",
+              "on-primary-fixed-variant": "#0040a2",
+              "surface-container": "#ededf8",
+              "on-background": "#191b23",
+              "inverse-surface": "#2e3038",
+              "inverse-on-surface": "#f0f0fb",
+              "secondary-container": "#fe7e4f",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d9d9e4",
+              "on-primary-fixed": "#001848",
+              "on-secondary-container": "#6b1f00",
+              "on-error": "#ffffff",
+              "surface-tint": "#0c56d0",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e7e7f2",
+              "on-primary-container": "#c4d2ff",
+              "outline-variant": "#c3c6d6",
+              "primary-container": "#0052cc",
+              "surface-bright": "#faf8ff",
+              "surface-container-highest": "#e1e2ec",
+              "tertiary-container": "#006661",
+              "on-surface": "#191b23",
+              "secondary-fixed": "#ffdbcf",
+              "tertiary-fixed": "#79f6ed",
+              "secondary": "#a43c12",
+              "primary-fixed": "#dae2ff",
+              "on-tertiary-fixed": "#00201e",
+              "surface": "#faf8ff",
+              "primary-fixed-dim": "#b2c5ff",
+              "on-secondary-fixed-variant": "#822800",
+              "surface-container-low": "#f3f3fd",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b2c5ff",
+              "on-surface-variant": "#434654",
+              "surface-variant": "#e1e2ec",
+              "on-secondary-fixed": "#380c00"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: #ededf8;
+            color: #003d9b;
+            font-weight: 600;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- Sidebar Left -->
+<aside class="w-72 bg-surface-container h-screen sticky top-0 flex flex-col p-6 space-y-8">
+<div class="flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+<span class="text-2xl font-bold tracking-tight text-primary">CloudJourney</span>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Bảng điều khiển</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl sidebar-active" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-medium">Quản lý tour</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-medium">Đặt chỗ</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">Khách hàng</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Cài đặt</span>
+</a>
+</nav>
+<div class="mt-auto p-4 rounded-2xl bg-primary-container text-white">
+<p class="text-xs opacity-80 mb-2">Đang sử dụng gói</p>
+<p class="font-bold">Premium Admin</p>
+<button class="mt-4 w-full py-2 bg-white text-primary rounded-lg text-sm font-bold">Nâng cấp</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-8 space-y-8 max-w-[1400px] mx-auto w-full">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface">Quản lý Tour</h1>
+<p class="text-on-surface-variant mt-1">Cập nhật và điều chỉnh các hành trình khám phá.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="pl-12 pr-6 py-3 bg-surface-container-highest border-none rounded-xl w-72 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" placeholder="Tìm kiếm tour..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                    Thêm tour mới
+                </button>
+</div>
+</header>
+<!-- Stats Quick View Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-3 bg-primary/10 text-primary rounded-xl material-symbols-outlined">map</span>
+<span class="text-xs font-bold text-tertiary">+12%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium">Tổng số Tour</p>
+<p class="text-2xl font-extrabold text-on-surface">128</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-3 bg-tertiary/10 text-tertiary rounded-xl material-symbols-outlined">visibility</span>
+<span class="text-xs font-bold text-tertiary">+5.4%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium">Lượt xem tháng</p>
+<p class="text-2xl font-extrabold text-on-surface">42.5K</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-3 bg-secondary-container/10 text-secondary rounded-xl material-symbols-outlined">shopping_cart</span>
+<span class="text-xs font-bold text-secondary">+2.1%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium">Booking mới</p>
+<p class="text-2xl font-extrabold text-on-surface">856</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="p-3 bg-outline/10 text-outline rounded-xl material-symbols-outlined">trending_up</span>
+<span class="text-xs font-bold text-tertiary">+18%</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium">Doanh thu dự tính</p>
+<p class="text-2xl font-extrabold text-on-surface">1.2B đ</p>
+</div>
+</section>
+<!-- Tour Table Container -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b-0">
+<th class="px-8 py-5 font-bold text-on-surface-variant text-sm">ẢNH</th>
+<th class="px-6 py-5 font-bold text-on-surface-variant text-sm">TÊN TOUR</th>
+<th class="px-6 py-5 font-bold text-on-surface-variant text-sm">DANH MỤC</th>
+<th class="px-6 py-5 font-bold text-on-surface-variant text-sm text-right">GIÁ (VNĐ)</th>
+<th class="px-6 py-5 font-bold text-on-surface-variant text-sm text-center">TRẠNG THÁI</th>
+<th class="px-8 py-5 font-bold text-on-surface-variant text-sm text-right">HÀNH ĐỘNG</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<img class="w-20 h-14 rounded-xl object-cover shadow-sm" data-alt="vibrant sunset over rice terraces in Sapa Vietnam with mist and soft golden lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA225FMpZjyfkuGpv3QIvuUT26bem4gmADM8zvYxzVaV_j1cTe4y3lvci6CwkfAM7usXoRxYCthzDgrBqKEpVgMo7LsnPMCvHtpLBpwhfbsTsDgBaNHVp4-qtvKnfjUqUhWX-eiTsk09jL_r5nqKmHeIhz8tR29Yypb3lNJxVFsd4kbjZDNWusHcZUhtSKmVru8bJ7h8pMA3lgLhn1Sdd3ByaiZKaS1DUQL89LRXdHVI4rqZPpy4q33Z8MGsbD5_HpWGlRFhhyEMeA"/>
+</td>
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Kỳ nghỉ Sapa: Bản Cát Cát</div>
+<div class="text-xs text-outline mt-1">ID: CJ-2024-001</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold uppercase tracking-wider">Khám phá</span>
+</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">
+                                4,500,000
+                            </td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    Hoạt động
+                                </span>
+</td>
+<td class="px-8 py-5 text-right space-x-2">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<img class="w-20 h-14 rounded-xl object-cover shadow-sm" data-alt="aerial drone view of turquoise water in Ha Long Bay with limestone karsts and traditional boats" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWKKxCyPhFYAqzm1tHTN17_OfBf32KCZoKjFGwoDuYakEAQSI2M3ZtBgh3DAJ8xwhk4MFFP3sG9unA4r8FoINC2mnos3VZp64iKdGWTtne3OftIB72TODyIWKpMZ53PEwCQdp1olK7RfbWEYmdmd54IiGX_epcrOrOoBYkx26ArLbeFbMqEKNb09puKypHi5wkJMf6j9i84MLoyIHJgjh6u1vbCHbzgJLrcocWuxPh-G2zRBpJoCeqQ71JlO2OHFgx6jkYwXaxAww"/>
+</td>
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Du thuyền Hạ Long 5 Sao</div>
+<div class="text-xs text-outline mt-1">ID: CJ-2024-042</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider">Nghỉ dưỡng</span>
+</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">
+                                8,200,000
+                            </td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    Hoạt động
+                                </span>
+</td>
+<td class="px-8 py-5 text-right space-x-2">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<img class="w-20 h-14 rounded-xl object-cover shadow-sm" data-alt="serene beach in Phu Quoc at sunrise with palm trees swaying over white sand and calm blue ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF-PpK2m_ciZL1YPG-sWwFLXXEy6TQqk5hHy_LKTPkyTfWsLRN2WiLuHy7GWr_N8fZHPWDJtXJxc16J_yzmpNbpGj0vDN2Jn2vCULKHbkcQyV25J35-t9tOQiKw4mfHFyJrvaLS02rmOK3L6Kg9V4Jc1v0UzlT5iqRSiX8Gic7CH2ohS_qALvRYT5ZYi3RxOEASkfhGv8TTWSK2eoTkR0Co2fak_c35B3r4cyef6JT3Z-uJ3uZf-GcNtU4MLmPTPGop2zgHrqbJFA"/>
+</td>
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Combo Phú Quốc: Sun World</div>
+<div class="text-xs text-outline mt-1">ID: CJ-2024-118</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-secondary-container/10 text-secondary rounded-full text-xs font-bold uppercase tracking-wider">Giải trí</span>
+</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">
+                                5,850,000
+                            </td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-high text-outline rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-outline rounded-full"></span>
+                                    Ẩn
+                                </span>
+</td>
+<td class="px-8 py-5 text-right space-x-2">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-5">
+<img class="w-20 h-14 rounded-xl object-cover shadow-sm" data-alt="ancient architecture of Hoi An old town with yellow walls and colorful lanterns during blue hour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQEpi9v2oR5szAzSZZ5GQVWWMnSObrL1ZxeL_QsRq70iRKAx6Wprqyzhwzrry6qFelT7540jOACILNuzhVNGUDgz0p4x8IBtLB5Wa9vleSQbfhRHSdxbfcmIdWoJtSFPnhO6rFT81wLraGsypW-wWY-GLfUG7AnAQVe5_1ibrAITCKWiq6fGYPf-Q9tE-Ehtc4HszWva1QKHBN7vAQ9VSHZEJyuMpWgFCwcQQMLkzGHa6TNNeYdDZlWZelNwfzo5xOXR8NrEC5_5U"/>
+</td>
+<td class="px-6 py-5">
+<div class="font-bold text-on-surface group-hover:text-primary transition-colors">Tour Phố Cổ Hội An</div>
+<div class="text-xs text-outline mt-1">ID: CJ-2024-009</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold uppercase tracking-wider">Văn hóa</span>
+</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">
+                                2,100,000
+                            </td>
+<td class="px-6 py-5 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    Hoạt động
+                                </span>
+</td>
+<td class="px-8 py-5 text-right space-x-2">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Quick Summary -->
+<footer class="px-8 py-6 bg-surface-container-low/50 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-surface-container">
+<div class="flex items-center gap-6 text-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span>
+<span class="text-on-surface-variant"><span class="font-bold text-on-surface">112</span> Hoạt động</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-outline rounded-full"></span>
+<span class="text-on-surface-variant"><span class="font-bold text-on-surface">16</span> Đang ẩn</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container text-outline">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container text-on-surface font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container text-on-surface font-medium">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container text-outline">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</footer>
+</div>
+<!-- Featured Analysis (Bento Element) -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-xl font-extrabold text-on-surface mb-6">Phân tích Hiệu suất Tour</h3>
+<div class="h-48 flex items-end justify-between gap-4">
+<div class="flex-1 bg-primary/20 rounded-t-xl h-[40%] relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">4.2k</div>
+</div>
+<div class="flex-1 bg-primary/30 rounded-t-xl h-[60%] relative group"></div>
+<div class="flex-1 bg-primary/40 rounded-t-xl h-[85%] relative group"></div>
+<div class="flex-1 bg-primary-container rounded-t-xl h-[95%] relative group"></div>
+<div class="flex-1 bg-primary/40 rounded-t-xl h-[70%] relative group"></div>
+<div class="flex-1 bg-primary/20 rounded-t-xl h-[55%] relative group"></div>
+<div class="flex-1 bg-primary/30 rounded-t-xl h-[45%] relative group"></div>
+</div>
+<div class="flex justify-between mt-4 text-xs font-bold text-outline">
+<span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+</div>
+<div class="bg-gradient-to-br from-tertiary to-tertiary-container p-8 rounded-[2rem] text-on-tertiary flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h3 class="text-2xl font-extrabold leading-tight">Mẹo tăng trưởng<br/>Booking tuần này</h3>
+<p class="mt-4 text-sm opacity-90 leading-relaxed">Tour "Sapa" đang có xu hướng tìm kiếm tăng 40%. Hãy thử chạy chiến dịch giảm giá 5% để đẩy mạnh chốt đơn.</p>
+</div>
+<button class="mt-8 py-4 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-2xl font-bold transition-all text-center">
+                    Xem chi tiết báo cáo
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer Script Transcription -->
+<footer class="hidden">
+<div class="copyright">© 2024 CloudJourney. Trải nghiệm hành trình không giới hạn.</div>
+<div class="links">
+<a href="#">Chính sách bảo mật</a>
+<a href="#">Điều khoản sử dụng</a>
+<a href="#">Liên hệ</a>
+<a href="#">Về chúng tôi</a>
+</div>
+</footer>
+</body></html>

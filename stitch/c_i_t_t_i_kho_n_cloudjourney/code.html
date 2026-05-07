@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#434654",
+                        "secondary-fixed": "#ffdbcf",
+                        "surface-container-low": "#f3f3fd",
+                        "surface-container-highest": "#e1e2ec",
+                        "on-tertiary-container": "#67e6dd",
+                        "surface-tint": "#0c56d0",
+                        "tertiary-container": "#006661",
+                        "surface-dim": "#d9d9e4",
+                        "primary-fixed": "#dae2ff",
+                        "on-tertiary-fixed-variant": "#00504c",
+                        "surface-variant": "#e1e2ec",
+                        "on-background": "#191b23",
+                        "primary-container": "#0052cc",
+                        "on-primary-fixed": "#001848",
+                        "surface": "#faf8ff",
+                        "on-secondary-fixed-variant": "#822800",
+                        "error": "#ba1a1a",
+                        "primary": "#003d9b",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b2c5ff",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e7e7f2",
+                        "outline": "#737685",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#380c00",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "secondary": "#a43c12",
+                        "on-secondary-container": "#6b1f00",
+                        "surface-container": "#ededf8",
+                        "on-surface": "#191b23",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#79f6ed",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "outline-variant": "#c3c6d6",
+                        "surface-bright": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "tertiary": "#004c48",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#00201e",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#c4d2ff",
+                        "inverse-surface": "#2e3038",
+                        "secondary-container": "#fe7e4f",
+                        "tertiary-fixed-dim": "#59dad1"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "24": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-xl shadow-primary/5">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
+<div class="text-2xl font-bold bg-gradient-to-br from-primary to-primary-container bg-clip-text text-transparent font-headline tracking-tight">
+                CloudJourney
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline tracking-tight">
+<a class="text-slate-600 hover:text-primary transition-all" href="#">Khám phá</a>
+<a class="text-slate-600 hover:text-primary transition-all" href="#">Điểm đến</a>
+<a class="text-slate-600 hover:text-primary transition-all" href="#">Hành trình</a>
+<a class="text-slate-600 hover:text-primary transition-all" href="#">Liên hệ</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-sm font-medium text-on-surface-variant cursor-pointer hover:text-primary transition-colors">VN/EN</span>
+<div class="h-10 w-10 rounded-full overflow-hidden ring-2 ring-primary-container/20">
+<img alt="User avatar" data-alt="Close-up portrait of a smiling young professional man with a friendly expression, soft natural indoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMAiOGzWeH-oMJe2Wk4mEBIM1eBj4NVPqMQng24llVYI__7gxsNXfFnNc7VQEp2dP8EAZIEFGkulLLoFbl2-6JUAMdnp868bY2ABDLw5LQOvPTnRXcTdlQUX8oA5l2LvH8Rlcr354eQYRV2M7GMKzc15PZDn0gWIlnEdLWWwDfJV4kyZDc9q8JYiC_jE1mmJx-UbfPt5ZjbP4DVVVYaO7zLuCUUXpaO5Xytm4X43UMgWSNJ_B-3paXlc0sbMwSz-0ct9ZG94fVrkE"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+<div class="mb-12">
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface font-headline mb-2">Cài đặt tài khoản</h1>
+<p class="text-on-surface-variant">Quản lý thông tin cá nhân và thiết lập trải nghiệm du lịch của bạn.</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar Menu Within Content -->
+<aside class="w-full lg:w-72 flex flex-col gap-2">
+<a class="flex items-center gap-4 px-6 py-4 bg-primary text-white rounded-24 shadow-lg shadow-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-medium">Hồ sơ cá nhân</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-all rounded-24 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="shield">shield</span>
+<span class="font-medium group-hover:text-on-surface">Bảo mật</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-all rounded-24 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="notifications">notifications</span>
+<span class="font-medium group-hover:text-on-surface">Thông báo</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-on-surface-variant hover:bg-surface-container transition-all rounded-24 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="history">history</span>
+<span class="font-medium group-hover:text-on-surface">Lịch sử đặt tour</span>
+</a>
+<div class="mt-8 pt-8 border-t border-outline-variant/30 px-6">
+<button class="flex items-center gap-4 text-error font-medium hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                        Đăng xuất
+                    </button>
+</div>
+</aside>
+<!-- Main Form Area -->
+<section class="flex-1 bg-surface-container-lowest rounded-24 p-8 md:p-12 shadow-sm">
+<div class="max-w-3xl">
+<!-- Avatar Upload -->
+<div class="flex flex-col md:flex-row items-center gap-8 mb-12">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden ring-4 ring-surface-container">
+<img alt="Profile image large" data-alt="Detailed close-up of a smiling male face, professional headshot with warm bright lighting and blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMXXYA3ReKOSg-SagAsy674YbRynr8GAw7-1GyJJZdcDNTw8OAqjM3S1XOJNoNyN359sSnbYmeTDs4dQWDuNwPrfOwvqSo0J6b--rDgzkG67-UFa-tEgmHpZuork3rC8rI2157HMjgr2ExLQCAL2H89Awz0CzICOf1fBOgNEqCOT0GmiKdT6ksNge6tLZBRnID25UlOmhINpYwYbTv0Rmpc6PBb9DXVRM3xvQ6HHO8OeT1pnT9_DbJ95sgOa_9TDD00CYoLTMYtI8"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg border-4 border-surface-container-lowest hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div>
+<h3 class="text-xl font-bold font-headline mb-1">Ảnh đại diện</h3>
+<p class="text-sm text-on-surface-variant mb-4">PNG, JPG hoặc GIF. Tối đa 5MB.</p>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container-high rounded-xl text-sm font-semibold hover:bg-surface-variant transition-colors">Tải ảnh mới</button>
+<button class="px-4 py-2 text-error text-sm font-semibold hover:bg-error-container/20 rounded-xl transition-colors">Gỡ bỏ</button>
+</div>
+</div>
+</div>
+<!-- Form Fields -->
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant px-1">Họ và tên</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" type="text" value="Nguyễn Văn A"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant px-1">Email</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" type="email" value="vana.nguyen@cloudjourney.com"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant px-1">Số điện thoại</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" type="tel" value="+84 987 654 321"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant px-1">Ngôn ngữ ưu tiên</label>
+<select class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all appearance-none">
+<option selected="">Tiếng Việt</option>
+<option>English (US)</option>
+<option>Français</option>
+<option>日本語</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant px-1">Địa chỉ</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all" rows="3">123 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh, Việt Nam</textarea>
+</div>
+<div class="pt-6 flex justify-end gap-4">
+<button class="px-8 py-3 rounded-24 font-bold text-primary hover:bg-surface-container transition-colors" type="button">Hủy bỏ</button>
+<button class="px-10 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-24 font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                                Lưu thay đổi
+                            </button>
+</div>
+</form>
+</div>
+</section>
+</div>
+<!-- Optional Dashboard Style Grid below for "Travel Stats" -->
+<section class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-tertiary-container/10 p-6 rounded-24 border border-tertiary-container/20">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="flight_takeoff">flight_takeoff</span>
+</div>
+<span class="font-headline font-bold text-tertiary">Chuyến đi đã thực hiện</span>
+</div>
+<div class="text-3xl font-extrabold text-on-surface">12</div>
+</div>
+<div class="bg-secondary-container/10 p-6 rounded-24 border border-secondary-container/20">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-white flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-headline font-bold text-secondary">Điểm thưởng tích lũy</span>
+</div>
+<div class="text-3xl font-extrabold text-on-surface">2,450</div>
+</div>
+<div class="bg-primary-container/10 p-6 rounded-24 border border-primary-container/20">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+</div>
+<span class="font-headline font-bold text-primary">Quốc gia đã ghé thăm</span>
+</div>
+<div class="text-3xl font-extrabold text-on-surface">8</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-24 bg-slate-50 dark:bg-slate-950 flex flex-col items-center py-12 px-8 mt-20">
+<div class="text-xl font-bold text-slate-900 mb-6 font-headline">CloudJourney</div>
+<div class="flex gap-8 mb-8 text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors underline decoration-2 underline-offset-4" href="#">Facebook</a>
+<a class="hover:text-primary transition-colors underline decoration-2 underline-offset-4" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors underline decoration-2 underline-offset-4" href="#">LinkedIn</a>
+</div>
+<div class="text-sm text-slate-400 font-body">
+            © 2024 CloudJourney. Tất cả quyền được bảo lưu.
+        </div>
+</footer>
+</body></html>

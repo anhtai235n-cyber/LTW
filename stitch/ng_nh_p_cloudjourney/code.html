@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng nhập - CloudJourney</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#59dad1",
+              "primary": "#003d9b",
+              "background": "#faf8ff",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "error": "#ba1a1a",
+              "outline": "#737685",
+              "on-tertiary-container": "#67e6dd",
+              "secondary-fixed-dim": "#ffb59c",
+              "on-tertiary-fixed-variant": "#00504c",
+              "error-container": "#ffdad6",
+              "tertiary": "#004c48",
+              "on-primary-fixed-variant": "#0040a2",
+              "surface-container": "#ededf8",
+              "on-background": "#191b23",
+              "inverse-surface": "#2e3038",
+              "inverse-on-surface": "#f0f0fb",
+              "secondary-container": "#fe7e4f",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d9d9e4",
+              "on-primary-fixed": "#001848",
+              "on-secondary-container": "#6b1f00",
+              "on-error": "#ffffff",
+              "surface-tint": "#0c56d0",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e7e7f2",
+              "on-primary-container": "#c4d2ff",
+              "outline-variant": "#c3c6d6",
+              "primary-container": "#0052cc",
+              "surface-bright": "#faf8ff",
+              "surface-container-highest": "#e1e2ec",
+              "tertiary-container": "#006661",
+              "on-surface": "#191b23",
+              "secondary-fixed": "#ffdbcf",
+              "tertiary-fixed": "#79f6ed",
+              "secondary": "#a43c12",
+              "primary-fixed": "#dae2ff",
+              "on-tertiary-fixed": "#00201e",
+              "surface": "#faf8ff",
+              "primary-fixed-dim": "#b2c5ff",
+              "on-secondary-fixed-variant": "#822800",
+              "surface-container-low": "#f3f3fd",
+              "on-error-container": "#93000a",
+              "inverse-primary": "#b2c5ff",
+              "on-surface-variant": "#434654",
+              "surface-variant": "#e1e2ec",
+              "on-secondary-fixed": "#380c00"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .deep-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 61, 155, 0.15);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Dreamy wide angle view of a pristine tropical beach at sunrise with soft pink and orange clouds reflecting on calm turquoise water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxyc1BbOtUtd6WZI-i5isM2JTwq33fzTBSgVhR3dZ2sfzYxm8o8b_mRUK57J1gVGTFgWwd3WQlgGJFAx39lSaB3cU4m3o2mjsPiZnm8DckMq_6k9PUZ6u3JVbVO1TLKlq6cf2CSpFgKV4Rooq5bx8_QsP-5XxQqZ50WR20RF9IiBIsOfQdKphP9fyjJDzeMApd6ejdzRyzTNxaHBKYUlv9LuqfECcgQMa83fH1D8PJp2cp4pmAlPi7hFHXTlQmQctXMhuZiqeWXdI"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+<main class="relative z-10 w-full max-w-[480px] px-6 py-12">
+<div class="glass-card deep-shadow rounded-3xl p-8 md:p-12 flex flex-col items-center">
+<div class="mb-8 text-center">
+<div class="flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">cloud_done</span>
+<span class="text-3xl font-extrabold tracking-tight text-primary">CloudJourney</span>
+</div>
+<h1 class="text-2xl font-bold text-on-surface mb-2">Chào mừng trở lại</h1>
+<p class="text-on-surface-variant text-sm">Bắt đầu hành trình tiếp theo của bạn ngay hôm nay</p>
+</div>
+<div class="w-full grid grid-cols-2 gap-4 mb-8">
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-all duration-300 group border border-outline-variant/20">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-semibold text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-all duration-300 group border border-outline-variant/20">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.05 20.28c-.98.95-2.05 1.72-3.2 1.72-1.13 0-1.52-.73-2.85-.73-1.34 0-1.78.71-2.85.71-1.12 0-2.23-.84-3.28-1.9-2.12-2.15-3.25-6.1-3.25-8.59 0-3.86 2.53-5.91 4.98-5.91 1.29 0 2.37.76 3.12.76.71 0 1.93-.89 3.44-.89 1.45 0 2.81.71 3.65 1.78-2.91 1.41-2.43 5.48.51 6.84-.71 1.83-1.6 3.59-2.27 4.31zM13.48 4.19c.61-.75 1.02-1.78 1.02-2.82 0-.15-.02-.3-.04-.45-1.04.04-2.3 1.01-3.05 1.88-.66.76-1.25 1.83-1.25 2.87 0 .17.02.32.06.45 1.15.09 2.3-.8 3.26-1.93z"></path>
+</svg>
+<span class="text-sm font-semibold text-on-surface">Apple</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-4 mb-8">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<span class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Hoặc bằng Email</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<form class="w-full space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface ml-1" for="email">Địa chỉ Email</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-highest border-none rounded-2xl focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-on-surface-variant/50" id="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="text-sm font-semibold text-on-surface" for="password">Mật khẩu</label>
+<a class="text-xs font-semibold text-primary hover:text-primary-container transition-colors" href="#">Quên mật khẩu?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<input class="w-full pl-11 pr-12 py-3.5 bg-surface-container-highest border-none rounded-2xl focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-on-surface-variant/50" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-on-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="pt-2">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-3xl font-bold text-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all" type="submit">
+                        Đăng nhập
+                    </button>
+</div>
+</form>
+<div class="mt-8 text-center">
+<p class="text-sm text-on-surface-variant">
+                    Bạn chưa có tài khoản? 
+                    <a class="ml-1 font-bold text-secondary-container hover:underline transition-all" href="#">Tạo tài khoản mới</a>
+</p>
+</div>
+</div>
+<div class="mt-12 text-center text-white/80 space-y-4">
+<div class="flex justify-center gap-6">
+<a class="text-xs font-medium hover:text-white transition-colors" href="#">Chính sách bảo mật</a>
+<a class="text-xs font-medium hover:text-white transition-colors" href="#">Điều khoản dịch vụ</a>
+</div>
+<p class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">© 2024 CloudJourney Digital Ventures</p>
+</div>
+</main>
+<div class="absolute top-8 left-8 z-20 hidden md:block">
+<div class="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span class="text-xs font-bold text-on-surface">1,240 người đang khám phá</span>
+</div>
+</div>
+</body></html>
