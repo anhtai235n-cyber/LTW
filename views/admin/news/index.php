@@ -1,122 +1,111 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Tin Tức | Admin CloudJourney</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans">
-    <!-- Admin Header -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
-            <a href="index.php?url=admin" class="flex items-center text-slate-600 hover:text-slate-900">
-                <span class="material-symbols-outlined text-sm mr-2">arrow_back</span> Quay lại
-            </a>
-        </div>
-    </nav>
+<?php
+/**
+ * File: views/admin/news/index.php
+ * Lưu ý: Không thêm <html>, <head>, <body> hay Sidebar vào đây 
+ * vì nó sẽ được nạp vào file admin/layout.php
+ */
+?>
 
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-slate-900 text-white p-6 overflow-y-auto">
-            <h2 class="text-xl font-bold mb-8">CloudJourney Admin</h2>
-            <nav class="space-y-2">
-                <a href="index.php?url=admin" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">dashboard</span> Dashboard
-                </a>
-                <a href="index.php?url=admin/users" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">people</span> Quản Lý User
-                </a>
-                <a href="index.php?url=admin/news" class="block px-4 py-3 rounded-lg text-sm font-semibold bg-slate-700 text-white">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">article</span> Quản Lý Tin Tức
-                </a>
-                <a href="index.php?url=admin/faqs" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">help</span> Quản Lý FAQ
-                </a>
-                <a href="index.php?url=admin/comments" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">comment</span> Duyệt Bình Luận
-                </a>
-                <a href="index.php?url=admin/ratings" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">star</span> Quản Lý Đánh Giá
-                </a>
-            </nav>
+<div class="max-w-6xl mx-auto">
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-slate-900">Quản Lý Tin Tức</h2>
+            <p class="text-slate-500 text-sm mt-1">Quản lý các bài viết và nội dung blog trên hệ thống</p>
         </div>
-
-        <!-- Main Content -->
-        <div class="flex-1 overflow-y-auto p-8">
-            <div class="mb-8 flex items-center justify-between">
-                <h2 class="text-3xl font-bold text-slate-900">Quản Lý Tin Tức</h2>
-                <a href="index.php?url=admin/news/create" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg transition inline-flex items-center">
-                    <span class="material-symbols-outlined text-sm mr-2">add</span> Tạo Bài Viết
-                </a>
-            </div>
-
-            <!-- News Table -->
-            <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-slate-100 border-b border-slate-200">
-                            <tr>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Tiêu Đề</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Tác Giả</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Trạng Thái</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Lượt Xem</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Ngày Tạo</th>
-                                <th class="px-6 py-4 text-center font-semibold text-slate-900">Hành Động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if(isset($news) && count($news) > 0): ?>
-                                <?php foreach($news as $article): ?>
-                                    <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
-                                        <td class="px-6 py-4">
-                                            <p class="font-semibold text-slate-900 max-w-xs truncate"><?= htmlspecialchars($article['title']) ?></p>
-                                            <p class="text-xs text-slate-500"><?= htmlspecialchars($article['slug']) ?></p>
-                                        </td>
-                                        <td class="px-6 py-4 text-slate-600"><?= htmlspecialchars($article['author_name'] ?? 'Admin') ?></td>
-                                        <td class="px-6 py-4">
-                                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold
-                                                <?= $article['status'] === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' ?>">
-                                                <?= $article['status'] === 'published' ? 'Công khai' : 'Nháp' ?>
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 text-slate-600"><?= number_format($article['views'] ?? 0) ?></td>
-                                        <td class="px-6 py-4 text-slate-600">
-                                            <?= date('d/m/Y H:i', strtotime($article['created_at'] ?? 'now')) ?>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <div class="flex items-center justify-center gap-2">
-                                                <a href="index.php?url=admin/news/edit&id=<?= $article['id'] ?>" 
-                                                   class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                                                    <span class="material-symbols-outlined text-sm">edit</span>
-                                                </a>
-                                                <form method="POST" action="index.php?url=admin/news/delete" style="display:inline;">
-                                                    <input type="hidden" name="news_id" value="<?= $article['id'] ?>">
-                                                    <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa bài viết này?')"
-                                                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition">
-                                                        <span class="material-symbols-outlined text-sm">delete</span>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="6" class="px-6 py-12 text-center text-slate-500">
-                                        Chưa có bài viết nào
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <a href="index.php?url=admin/news/create" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2.5 rounded-lg transition inline-flex items-center shadow-md">
+            <span class="material-symbols-outlined text-sm mr-2">add</span> Tạo Bài Viết Mới
+        </a>
     </div>
-</body>
-</html>
+
+    <div class="mb-6">
+        <form action="index.php" method="GET" class="flex gap-2">
+            <input type="hidden" name="url" value="admin/news">
+            <div class="relative flex-1">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" 
+                       placeholder="Tìm kiếm tiêu đề hoặc nội dung bài viết..." 
+                       class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition">
+            </div>
+            <button type="submit" class="bg-slate-800 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-900 transition">
+                Tìm kiếm
+            </button>
+            <?php if(isset($_GET['search'])): ?>
+                <a href="index.php?url=admin/news" class="bg-slate-100 text-slate-600 px-4 py-2.5 rounded-xl font-semibold hover:bg-slate-200 transition flex items-center">
+                    Xóa lọc
+                </a>
+            <?php endif; ?>
+        </form>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="px-6 py-4 font-semibold text-slate-700">Thông tin bài viết</th>
+                    <th class="px-6 py-4 font-semibold text-slate-700 text-center">Trạng Thái</th>
+                    <th class="px-6 py-4 font-semibold text-slate-700 text-center">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+                <?php if(!empty($news)): ?>
+                    <?php foreach($news as $article): ?>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="px-6 py-4">
+                            <div class="font-bold text-slate-900 text-lg mb-1 group">
+                                <a href="index.php?url=news/<?= $article['slug'] ?>" 
+                                target="_blank" 
+                                class="hover:text-blue-700 flex items-center gap-2 transition-colors">
+                                    <?= htmlspecialchars($article['title']) ?>
+                                    <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                                        open_in_new
+                                    </span>
+                                </a>
+                            </div>
+                            
+                            <div class="flex items-center gap-4 text-xs text-slate-500">
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs">calendar_today</span>
+                                    <?= date('d/m/Y', strtotime($article['created_at'])) ?>
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs">person</span>
+                                    <?= htmlspecialchars($article['author_name'] ?? 'Admin') ?>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold shadow-sm <?= $article['status'] === 'published' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700' ?>">
+                                <?= $article['status'] === 'published' ? 'Công khai' : 'Bản nháp' ?>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex justify-center gap-3">
+                                <a href="index.php?url=admin/news/edit&id=<?= $article['id'] ?>" 
+                                   class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" 
+                                   title="Chỉnh sửa">
+                                    <span class="material-symbols-outlined">edit_square</span>
+                                </a>
+                                
+                                <form action="index.php?url=admin/news/delete" method="POST" class="inline" 
+                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
+                                    <input type="hidden" name="news_id" value="<?= $article['id'] ?>">
+                                    <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Xóa">
+                                        <span class="material-symbols-outlined">delete_forever</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3" class="px-6 py-20 text-center">
+                            <span class="material-symbols-outlined text-5xl text-slate-300 block mb-2">article</span>
+                            <p class="text-slate-500">Hệ thống chưa có bài viết nào.</p>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

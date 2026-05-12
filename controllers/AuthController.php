@@ -27,7 +27,6 @@ class AuthController {
         require_once 'views/login/index.php';
     }
 
-    // Xử lý logic đăng nhập
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Verify CSRF token
@@ -37,7 +36,6 @@ class AuthController {
                 return;
             }
 
-            // Validate input
             Validator::reset();
             Validator::required($_POST['username'] ?? '', 'Tên đăng nhập');
             Validator::required($_POST['password'] ?? '', 'Mật khẩu');
@@ -55,7 +53,6 @@ class AuthController {
             $result = $userModel->login();
 
             if ($result == "success") {
-                // Lưu session
                 $_SESSION['user_id'] = $userModel->id;
                 $_SESSION['username'] = $userModel->username;
                 $_SESSION['fullname'] = $userModel->fullname;
@@ -63,11 +60,10 @@ class AuthController {
                 $_SESSION['avatar'] = $userModel->avatar;
                 CsrfToken::destroy();
 
-                // Phân quyền chuyển hướng
                 if ($userModel->role == 'admin') {
-                    header("Location: /admin/index");
+                    header("Location: index.php?url=admin");
                 } else {
-                    header("Location: /home");
+                    header("Location: index.php?url=home");
                 }
                 exit;
             } elseif ($result == "banned") {
@@ -143,7 +139,7 @@ class AuthController {
         // Hủy toàn bộ session
         session_unset();
         session_destroy();
-        header("Location: /login");
+        header("Location: index.php?url=home");
         exit;
     }
 }

@@ -31,7 +31,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="/login" method="POST" class="space-y-6">
+        <form action="index.php?url=login" method="POST" class="space-y-6">
             <?php echo CsrfToken::field(); ?>
             <div>
                 <label class="block text-sm font-bold text-gray-700 mb-2">Tên đăng nhập</label>

@@ -25,6 +25,7 @@
                 <a href="#features" class="hover:text-blue-700 transition">Lý do chọn</a>
                 <a href="#testimonials" class="hover:text-blue-700 transition">Đánh giá</a>
                 <a href="/contact" class="hover:text-blue-700 transition">Liên hệ</a>
+                <a href="index.php?url=news" class="hover:text-blue-700 transition">Tin tức</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -35,7 +36,7 @@
                     <a href="/logout" class="rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-white hover:bg-red-600 transition">Đăng xuất</a>
                 </div>
             <?php else: ?>
-                <a href="/login" class="hidden md:inline-flex items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
+                <a href="index.php?url=login" class="hidden md:inline-flex items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
             <?php endif; ?>
         </div>
     </div>

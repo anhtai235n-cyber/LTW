@@ -10,7 +10,6 @@
     <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
-    <!-- Admin Header -->
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
@@ -21,7 +20,6 @@
     </nav>
 
     <div class="flex h-screen">
-        <!-- Sidebar -->
         <div class="w-64 bg-slate-900 text-white p-6 overflow-y-auto">
             <h2 class="text-xl font-bold mb-8">CloudJourney Admin</h2>
             <nav class="space-y-2">
