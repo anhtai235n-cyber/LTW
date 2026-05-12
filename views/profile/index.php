@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
@@ -19,9 +20,21 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-12">
+    <main class="max-w-6xl mx-auto px-6 py-12 scroll-reveal reveal-from-bottom reveal-delay-150">
         <?php if(isset($user) && isset($action)): ?>
             <?php if($action === 'index'): ?>
+                <!-- Profile Header -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <p class="text-sm uppercase tracking-[0.2em] text-slate-500">Hồ Sơ Người Dùng</p>
+                        <h1 class="text-3xl font-bold text-slate-900 mt-2">Xin chào, <?= htmlspecialchars($user['fullname'] ?? $user['username']) ?></h1>
+                    </div>
+                    <a href="index.php?url=profile/update" class="inline-flex items-center gap-2 rounded-full bg-blue-700 px-5 py-3 text-white font-semibold shadow-lg shadow-blue-700/10 hover:bg-blue-800 transition">
+                        <span class="material-symbols-outlined">edit</span>
+                        Chỉnh Sửa Thông Tin Cá Nhân
+                    </a>
+                </div>
+
                 <!-- View Profile -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Left: Profile Info -->
@@ -86,6 +99,10 @@
                                     <a href="index.php?url=profile/changePassword" 
                                        class="block w-full text-center bg-slate-700 hover:bg-slate-800 text-white font-semibold px-4 py-2 rounded-lg transition">
                                         <span class="material-symbols-outlined text-sm mr-2" style="display:inline;">lock</span> Đổi Mật Khẩu
+                                    </a>
+                                    <a href="index.php?url=profile/paymentInfo" 
+                                       class="block w-full text-center bg-green-700 hover:bg-green-800 text-white font-semibold px-4 py-2 rounded-lg transition">
+                                        <span class="material-symbols-outlined text-sm mr-2" style="display:inline;">credit_card</span> Thông Tin Thanh Toán
                                     </a>
                                 </div>
                             </div>
@@ -295,6 +312,59 @@
                         </div>
                     </form>
                 </div>
+
+            <?php elseif($action === 'paymentInfo'): ?>
+                <!-- Payment Info Form -->
+                <div class="max-w-2xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-900 mb-8">Thông Tin Thanh Toán</h1>
+
+                    <form method="POST" action="index.php?url=profile/payment"
+                          class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-6">
+
+                        <!-- Card Holder Name -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Tên Chủ Thẻ</label>
+                            <input type="text" name="card_holder" 
+                                   class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   placeholder="NGUYEN VAN A">
+                        </div>
+
+                        <!-- Card Number -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Số Thẻ</label>
+                            <input type="text" name="card_number" 
+                                   class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   placeholder="1234 5678 9012 3456">
+                        </div>
+
+                        <!-- Expiry Date & CVV -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Ngày Hết Hạn</label>
+                                <input type="text" name="expiry_date" 
+                                       class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                       placeholder="MM/YY">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">CVV</label>
+                                <input type="text" name="cvv" 
+                                       class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                       placeholder="123">
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-4 pt-4 border-t border-slate-200">
+                            <button type="submit" class="flex-1 bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-3 rounded-lg transition">
+                                <span class="material-symbols-outlined text-sm mr-2" style="display:inline;">credit_card</span> Lưu Thông Tin
+                            </button>
+                            <a href="index.php?url=profile" class="flex-1 text-center bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold px-6 py-3 rounded-lg transition">
+                                <span class="material-symbols-outlined text-sm mr-2" style="display:inline;">close</span> Hủy Bỏ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
             <?php endif; ?>
         <?php else: ?>
             <!-- Not logged in or error -->
@@ -308,5 +378,6 @@
             </div>
         <?php endif; ?>
     </main>
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

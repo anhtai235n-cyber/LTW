@@ -50,7 +50,9 @@ class AdminController
             'total_tours' => count($allTours)
         ];
 
-        require_once 'views/admin/index.php';
+        $pageTitle = 'Dashboard';
+        $contentView = 'views/admin/index.php';
+        require_once 'views/admin/layout.php';
     }
 
     // ===================== QUẢN LÝ TOUR =====================
@@ -744,6 +746,71 @@ class AdminController
             exit;
         } else {
             header("Location: index.php?url=admin/comments&error=Lỗi khi xoá");
+            exit;
+        }
+    }
+
+    // ===================== QUẢN LÝ FAQ =====================
+    public function faqs_create()
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            header("Location: index.php?url=admin/faqs");
+            exit;
+        }
+
+        $faqModel = new FAQ($this->db);
+        $faqModel->question = $_POST['question'] ?? '';
+        $faqModel->answer = $_POST['answer'] ?? '';
+        $faqModel->category = $_POST['category'] ?? '';
+        $faqModel->order_by = $_POST['ordering'] ?? 0;
+
+        if ($faqModel->create()) {
+            header("Location: index.php?url=admin/faqs&msg=Tạo FAQ thành công");
+            exit;
+        } else {
+            header("Location: index.php?url=admin/faqs&error=Lỗi khi tạo FAQ");
+            exit;
+        }
+    }
+
+    public function faqs_update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            header("Location: index.php?url=admin/faqs");
+            exit;
+        }
+
+        $faqModel = new FAQ($this->db);
+        $faqModel->id = $_POST['faq_id'] ?? 0;
+        $faqModel->question = $_POST['question'] ?? '';
+        $faqModel->answer = $_POST['answer'] ?? '';
+        $faqModel->category = $_POST['category'] ?? '';
+        $faqModel->order_by = $_POST['ordering'] ?? 0;
+
+        if ($faqModel->update()) {
+            header("Location: index.php?url=admin/faqs&msg=Cập nhật FAQ thành công");
+            exit;
+        } else {
+            header("Location: index.php?url=admin/faqs&error=Lỗi khi cập nhật FAQ");
+            exit;
+        }
+    }
+
+    public function faqs_delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            header("Location: index.php?url=admin/faqs");
+            exit;
+        }
+
+        $faqModel = new FAQ($this->db);
+        $faqModel->id = $_POST['faq_id'] ?? 0;
+
+        if ($faqModel->delete()) {
+            header("Location: index.php?url=admin/faqs&msg=Xóa FAQ thành công");
+            exit;
+        } else {
+            header("Location: index.php?url=admin/faqs&error=Lỗi khi xóa FAQ");
             exit;
         }
     }

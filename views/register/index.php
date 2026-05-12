@@ -11,9 +11,10 @@
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-gray-50 flex items-center justify-center min-h-screen py-10">
-    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md scroll-reveal reveal-from-bottom reveal-delay-150">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-extrabold text-blue-900">Đăng ký</h1>
             <p class="text-gray-500 mt-2">Trở thành thành viên của CloudJourney</p>
@@ -55,5 +56,6 @@
             Đã có tài khoản? <a href="/login" class="text-blue-600 font-bold hover:underline">Đăng nhập</a>
         </p>
     </div>
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .prose img { border-radius: 1rem; margin: 2rem 0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
     </style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">

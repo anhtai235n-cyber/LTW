@@ -116,7 +116,7 @@ class ProfileController {
 
                 $action = 'update';
                 $pageTitle = "Chỉnh Sửa Hồ Sơ";
-                require_once 'views/profile/index.php';
+                require_once 'views/profile/update.php';
             } else {
                 header("Location: ?url=home");
                 exit;
@@ -174,7 +174,52 @@ class ProfileController {
 
                 $action = 'changePassword';
                 $pageTitle = "Đổi Mật Khẩu";
-                require_once 'views/profile/index.php';
+                require_once 'views/profile/changePassword.php';
+            } else {
+                header("Location: ?url=home");
+                exit;
+            }
+        }
+    }
+
+    public function paymentInfo() {
+        // Kiểm tra user đã đăng nhập chưa
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: ?url=login");
+            exit;
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userModel = new User($this->db);
+            $userModel->id = $_SESSION['user_id'];
+            // Lưu thông tin thanh toán - có thể cần thêm fields vào database
+            // Ví dụ: card_number, expiry_date, card_holder, etc.
+            // Hiện tại chỉ lưu placeholder
+            $_SESSION['payment_success'] = "Thông tin thanh toán đã được cập nhật!";
+            header("Location: ?url=profile/payment");
+            exit;
+        } else {
+            $userModel = new User($this->db);
+            $userModel->id = $_SESSION['user_id'];
+            
+            if($userModel->getById()) {
+                $user = [
+                    'id' => $userModel->id,
+                    'username' => $userModel->username,
+                    'fullname' => $userModel->fullname,
+                    'email' => $userModel->email,
+                    'role' => $userModel->role,
+                    'status' => $userModel->status,
+                    'avatar' => $userModel->avatar,
+                    'phone' => $userModel->phone,
+                    'address' => $userModel->address,
+                    'bio' => $userModel->bio,
+                    'created_at' => $userModel->created_at
+                ];
+
+                $action = 'paymentInfo';
+                $pageTitle = "Thông Tin Thanh Toán";
+                require_once 'views/profile/paymentInfo.php';
             } else {
                 header("Location: ?url=home");
                 exit;

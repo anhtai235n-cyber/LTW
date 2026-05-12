@@ -7,10 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .fade-in { animation: fadeIn 0.6s ease-out both; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
-    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm fade-in">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.php?url=home" class="text-2xl font-bold text-slate-900">CloudJourney</a>
             <a href="index.php?url=home" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
@@ -19,12 +23,12 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-12 fade-in">
         <!-- Main Image -->
-        <div class="mb-8 rounded-3xl overflow-hidden shadow-xl h-96 bg-slate-200">
+        <div class="mb-8 rounded-3xl overflow-hidden shadow-xl h-96 bg-slate-200 fade-in">
             <img src="<?= !empty($tour['image_url']) ? '/' . htmlspecialchars($tour['image_url']) : 'uploads/picture1.jfif' ?>" 
                 alt="<?= htmlspecialchars($tour['name']) ?>" 
-                class="w-full h-full object-cover">
+                class="w-full h-full object-cover transition duration-700 ease-out hover:scale-105">
         </div>
 
         <!-- Content -->
@@ -198,13 +202,13 @@
 
         <!-- Ratings Section -->
         <div class="mt-12 pt-12 border-t-2 border-slate-300">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-2 fade-in">
                 <span class="material-symbols-outlined text-amber-500">star</span>
                 Đánh Giá &amp; Nhận Xét (<?= isset($ratings) ? count($ratings) : 0 ?>)
             </h2>
 
             <!-- Rating Stats -->
-            <?php if(isset($ratingStats) && $ratingStats['count'] > 0): ?>
+            <?php if(isset($ratingStats) && isset($ratingStats['count']) && $ratingStats['count'] > 0): ?>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     <!-- Overall Rating -->
                     <div class="bg-white rounded-2xl p-8 border border-slate-200 text-center">

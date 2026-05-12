@@ -12,10 +12,43 @@
         .glass-panel { background: rgba(255,255,255,0.72); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .animate-fade-in { animation: fadeIn 0.8s ease-out both; }
+        .animate-fade-up { animation: fadeInUp 0.9s ease-out both; }
+        .animate-fade-down { animation: fadeInDown 0.9s ease-out both; }
+        .animate-slide-up { animation: slideUp 1s ease-out both; }
+        .animate-scale-up { animation: scaleUp 0.8s ease-out both; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-300 { animation-delay: 0.3s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        .animate-delay-500 { animation-delay: 0.5s; }
+        .animate-delay-600 { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-[#faf8ff] text-[#191b23] font-sans">
-<nav class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
+<nav class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm animate-fade-down animate-delay-200">
     <div class="max-w-7xl mx-auto px-6 md:px-8 h-24 flex items-center justify-between">
         <div class="flex items-center gap-8">
             <a href="?url=home" class="text-2xl font-bold text-slate-900"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?></a>
@@ -33,6 +66,9 @@
             <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="hidden md:flex items-center gap-4">
                     <span class="text-sm font-medium text-slate-700">Xin chào, <?= htmlspecialchars($_SESSION['fullname']) ?></span>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                        <a href="index.php?url=admin" class="rounded-full bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition">Admin</a>
+                    <?php endif; ?>
                     <a href="/logout" class="rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-white hover:bg-red-600 transition">Đăng xuất</a>
                 </div>
             <?php else: ?>
@@ -42,16 +78,16 @@
     </div>
 </nav>
 <main class="pt-24">
-    <section class="relative overflow-hidden min-h-[90vh]">
+    <section class="relative overflow-hidden min-h-[90vh] scroll-reveal reveal-from-left reveal-delay-100">
         <div class="absolute inset-0">
-            <img src="<?= isset($settings['hero_image']) && $settings['hero_image'] ? htmlspecialchars($settings['hero_image']) : 'uploads/picture1.jfif' ?>" alt="Banner" class="w-full h-full object-cover opacity-90">
+            <img src="<?= isset($settings['hero_image']) && $settings['hero_image'] ? htmlspecialchars($settings['hero_image']) : 'uploads/picture1.jfif' ?>?v=<?= time() ?>" alt="Banner" class="w-full h-full object-cover opacity-90">
             <div class="absolute inset-0 bg-gradient-to-br from-slate-950/25 via-slate-950/10 to-slate-950/35"></div>
         </div>
-        <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-24 text-center text-white">
-            <p class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium tracking-wide text-white/90 shadow-lg shadow-slate-950/20"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?> • Khám phá hành trình tuyệt vời</p>
-            <h1 class="mt-8 text-4xl md:text-6xl font-extrabold leading-tight"><?= htmlspecialchars($settings['hero_title'] ?? 'Khám phá hành trình tuyệt vời của bạn') ?></h1>
-            <p class="mt-6 text-base md:text-lg text-white/80">Hành trình trọn vẹn từ khởi hành đến điểm đến, thiết kế riêng cho trải nghiệm du lịch của bạn.</p>
-            <form action="index.php" method="GET" class="mt-14 glass-panel rounded-[2rem] border border-white/70 shadow-2xl p-6 md:p-8 text-left">
+        <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-24 text-center text-white animate-fade-up animate-delay-200">
+            <p class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium tracking-wide text-white/90 shadow-lg shadow-slate-950/20 animate-fade-up animate-delay-300"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?> • Khám phá hành trình tuyệt vời</p>
+            <h1 class="mt-8 text-4xl md:text-6xl font-extrabold leading-tight animate-fade-up animate-delay-400"><?= htmlspecialchars($settings['hero_title'] ?? 'Khám phá hành trình tuyệt vời của bạn') ?></h1>
+            <p class="mt-6 text-base md:text-lg text-white/80 animate-fade-up animate-delay-500">Hành trình trọn vẹn từ khởi hành đến điểm đến, thiết kế riêng cho trải nghiệm du lịch của bạn.</p>
+            <form action="index.php" method="GET" class="mt-14 glass-panel rounded-[2rem] border border-white/70 shadow-2xl p-6 md:p-8 text-left animate-slide-up animate-delay-600">
                 <input type="hidden" name="url" value="search">
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5 items-end">
                     <!-- Location -->
@@ -123,8 +159,8 @@
             </form>
         </div>
     </section>
-    <section id="destinations" class="max-w-7xl mx-auto px-6 md:px-8 py-24">
-        <div class="text-center mb-14">
+    <section id="destinations" class="max-w-7xl mx-auto px-6 md:px-8 py-24 scroll-reveal reveal-from-right reveal-delay-100">
+        <div class="text-center mb-14 animate-fade-up animate-delay-200">
             <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Chuyến đi nổi bật</p>
             <h2 class="mt-4 text-4xl md:text-5xl font-extrabold text-slate-900">Chuyến đi kết hợp tiện nghi và cảnh đẹp</h2>
             <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Những hành trình được chọn lọc dành cho bạn để khám phá vẻ đẹp thế giới cùng dịch vụ tận tâm.</p>
@@ -132,7 +168,7 @@
         <div class="grid gap-8 md:grid-cols-3">
             <?php if (isset($activeTours) && count($activeTours) > 0): ?>
                 <?php foreach ($activeTours as $tour): ?>
-                <article class="tour-card overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_90px_rgba(15,23,42,0.08)] border border-slate-200">
+                <article class="tour-card overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_90px_rgba(15,23,42,0.08)] border border-slate-200 animate-slide-up">
                     <div class="relative h-72 overflow-hidden">
                         <img src="<?= $tour['image_url'] ? '/' . htmlspecialchars($tour['image_url']) : 'uploads/picture1.jfif' ?>" alt="<?= htmlspecialchars($tour['name']) ?>" class="h-full w-full object-cover transition duration-500 hover:scale-105" />
                         <span class="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-900 shadow-sm"><?= htmlspecialchars($tour['category']) ?></span>
@@ -140,9 +176,9 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between gap-4 mb-4">
                             <div class="flex-1">
-                                <h3 class="text-xl font-semibold text-slate-900 truncate" title="<?= htmlspecialchars($tour['name']) ?>"><?= htmlspecialchars($tour['name']) ?></h3>
-                                <p class="mt-2 text-sm text-slate-500 truncate"><span class="material-symbols-outlined text-[14px] align-middle">location_on</span> <?= htmlspecialchars($tour['location'] ?? 'Chưa cập nhật') ?></p>
-                                <p class="mt-1 text-sm text-slate-500 truncate"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> <?= htmlspecialchars($tour['duration'] ?? 'Chưa cập nhật') ?></p>
+                                <h3 class="text-xl font-semibold text-slate-900 break-words whitespace-normal" title="<?= htmlspecialchars($tour['name']) ?>"><?= htmlspecialchars($tour['name']) ?></h3>
+                                <p class="mt-2 text-sm text-slate-500 break-words whitespace-normal"><span class="material-symbols-outlined text-[14px] align-middle">location_on</span> <?= htmlspecialchars($tour['location'] ?? 'Chưa cập nhật') ?></p>
+                                <p class="mt-1 text-sm text-slate-500 break-words whitespace-normal"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> <?= htmlspecialchars($tour['duration'] ?? 'Chưa cập nhật') ?></p>
                             </div>
                             <div class="text-right">
                                 <p class="text-xl font-extrabold text-blue-700"><?= number_format((float)($tour['price'] ?? 0), 0, ',', '.') ?>đ</p>
@@ -162,7 +198,7 @@
             <?php endif; ?>
         </div>
     </section>
-    <section id="features" class="bg-slate-50 py-24">
+    <section id="features" class="bg-slate-50 py-24 scroll-reveal reveal-from-left reveal-delay-200">
         <div class="max-w-7xl mx-auto px-6 md:px-8">
             <div class="text-center mb-14">
                 <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Tại sao chọn CloudJourney?</p>
@@ -170,22 +206,22 @@
                 <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Chúng tôi mang đến sự an tâm và những trải nghiệm độc đáo nhất cho mọi hành trình của bạn.</p>
             </div>
             <div class="grid gap-6 md:grid-cols-4">
-                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg">
+                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg animate-fade-up animate-delay-200">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl mx-auto flex items-center justify-center text-blue-700 text-3xl mb-6">✔</div>
                     <h4 class="text-xl font-semibold mb-3">An toàn tuyệt đối</h4>
                     <p class="text-sm text-slate-600">Hệ thống bảo hiểm và hỗ trợ khách hàng 24/7 trên mọi hành trình.</p>
                 </div>
-                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg">
+                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg animate-fade-up animate-delay-300">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl mx-auto flex items-center justify-center text-blue-700 text-3xl mb-6">💰</div>
                     <h4 class="text-xl font-semibold mb-3">Giá cả cạnh tranh</h4>
                     <p class="text-sm text-slate-600">Cam kết giá tốt nhất với nhiều ưu đãi hấp dẫn.</p>
                 </div>
-                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg">
+                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg animate-fade-up animate-delay-400">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl mx-auto flex items-center justify-center text-blue-700 text-3xl mb-6">🗺</div>
                     <h4 class="text-xl font-semibold mb-3">Lộ trình đa dạng</h4>
                     <p class="text-sm text-slate-600">Hàng ngàn điểm đến được cập nhật liên tục mỗi tuần.</p>
                 </div>
-                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg">
+                <div class="rounded-[2rem] bg-white p-8 shadow-sm border border-slate-200 text-center transition hover:shadow-lg animate-fade-up animate-delay-500">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl mx-auto flex items-center justify-center text-blue-700 text-3xl mb-6">🤝</div>
                     <h4 class="text-xl font-semibold mb-3">Dịch vụ tận tâm</h4>
                     <p class="text-sm text-slate-600">ội ngũ tư vấn viên giàu kinh nghiệm phục vụ chu đáo.</p>
@@ -193,28 +229,28 @@
             </div>
         </div>
     </section>
-    <section id="testimonials" class="py-24">
+    <section id="testimonials" class="py-24 scroll-reveal reveal-from-bottom reveal-delay-300">
         <div class="max-w-7xl mx-auto px-6 md:px-8">
-            <div class="text-center mb-14">
+            <div class="text-center mb-14 animate-fade-up animate-delay-200">
                 <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Khách hàng nói gì về chúng tôi</p>
                 <h2 class="mt-4 text-4xl md:text-5xl font-extrabold text-slate-900">Trải nghiệm thực tế từ khách hàng</h2>
             </div>
             <div class="grid gap-8 lg:grid-cols-3">
-                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200">
+                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200 animate-fade-up animate-delay-200">
                     <p class="text-slate-600">“Mọi chuyến đi đều được tổ chức vô cùng chuyên nghiệp. Tôi không cần phải lo lắng bất cứ điều gì từ lúc đặt tour cho đến khi trở về nhà.”</p>
                     <div class="mt-8">
                         <p class="font-semibold text-slate-900">Minh Anh</p>
                         <p class="text-sm text-slate-500">Giám đốc Sáng tạo</p>
                     </div>
                 </div>
-                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200">
+                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200 animate-fade-up animate-delay-300">
                     <p class="text-slate-600">“Dịch vụ xuất sắc và giá cả hợp lý. Tour Bali thực sự là một trải nghiệm không thể quên.”</p>
                     <div class="mt-8">
                         <p class="font-semibold text-slate-900">Hoàng Nam</p>
                         <p class="text-sm text-slate-500">Nhà báo du lịch</p>
                     </div>
                 </div>
-                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200">
+                <div class="rounded-[2rem] bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] border border-slate-200 animate-fade-up animate-delay-400">
                     <p class="text-slate-600">“Hỗ trợ nhiệt tình, tư vấn lộ trình rất hợp lý cho người đi lần đầu. Sẽ quay lại!”</p>
                     <div class="mt-8">
                         <p class="font-semibold text-slate-900">Lan Phương</p>
@@ -224,11 +260,11 @@
             </div>
         </div>
     </section>
-    <section class="bg-blue-900 text-white py-24">
-        <div class="max-w-6xl mx-auto px-6 md:px-8 text-center">
+    <section class="bg-blue-900 text-white py-24 scroll-reveal reveal-scale reveal-delay-200">
+        <div class="max-w-6xl mx-auto px-6 md:px-8 text-center animate-fade-up animate-delay-200">
             <h2 class="text-4xl md:text-5xl font-extrabold">ăng ký để nhận ưu đãi bí mật</h2>
             <p class="mt-4 text-slate-200 max-w-2xl mx-auto">Gia nhập cộng đồng hơn 50,000 người yêu du lịch và nhận những deal hấp dẫn nhất trực tiếp vào email của bạn.</p>
-            <div class="mt-10 flex flex-col gap-4 sm:flex-row items-center justify-center">
+            <div class="mt-10 flex flex-col gap-4 sm:flex-row items-center justify-center animate-fade-up animate-delay-300">
                 <input type="email" placeholder="ịa chỉ email của bạn" class="w-full max-w-xl rounded-full border border-white/30 bg-white/10 px-6 py-4 text-white placeholder:text-slate-200 outline-none focus:border-white focus:bg-white/15" />
                 <button class="rounded-full bg-orange-500 px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-white hover:bg-orange-400 transition">ăng ký ngay</button>
             </div>
@@ -272,5 +308,6 @@
     </div>
     <div class="mt-10 border-t border-slate-800 pt-6 text-center text-sm text-slate-500">© <?= date('Y') ?> <?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?>. Tất cả quyền được bảo lưu.</div>
 </footer>
+<script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

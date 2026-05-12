@@ -12,9 +12,14 @@
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
-            <a href="index.php?url=home" class="flex items-center text-slate-600 hover:text-slate-900">
-                <span class="material-symbols-outlined text-sm mr-2">home</span> Trang chủ
-            </a>
+            <div class="flex items-center gap-4">
+                <a href="index.php?url=home" class="flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+                    <span class="material-symbols-outlined text-sm mr-2">home</span> Trang chủ
+                </a>
+                <a href="index.php?url=logout" class="flex items-center px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+                    <span class="material-symbols-outlined text-sm mr-2">logout</span> Đăng xuất
+                </a>
+            </div>
         </div>
     </nav>
 

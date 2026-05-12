@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
@@ -21,14 +22,14 @@
 
     <main class="max-w-4xl mx-auto px-6 py-12">
         <!-- Header -->
-        <div class="text-center mb-12">
+        <div class="text-center mb-12 scroll-reveal reveal-from-bottom reveal-delay-100">
             <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Câu Hỏi Thường Gặp (FAQ)</h1>
             <p class="text-lg text-slate-600">Tìm câu trả lời cho những câu hỏi phổ biến của bạn</p>
         </div>
 
         <!-- FAQ Content -->
         <?php if(isset($faq_grouped) && count($faq_grouped) > 0): ?>
-            <div class="space-y-8">
+            <div class="space-y-8 scroll-reveal reveal-from-right reveal-delay-150">
                 <?php foreach($faq_grouped as $category => $items): ?>
                     <!-- Category Section -->
                     <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-200">
@@ -140,5 +141,6 @@
             });
         });
     </script>
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

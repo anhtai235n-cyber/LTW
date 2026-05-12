@@ -11,6 +11,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-slate-50 text-slate-900">
 <nav class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
@@ -22,7 +23,19 @@
             <a href="?url=home#features" class="hover:text-blue-700 transition">Lý do chọn</a>
             <a href="?url=contact" class="text-blue-700 font-semibold">Liên hệ</a>
         </div>
-        <a href="?url=login" class="rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
+        <div class="flex items-center gap-4">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <div class="hidden md:flex items-center gap-4">
+                    <span class="text-sm font-medium text-slate-700">Xin chào, <?= htmlspecialchars($_SESSION['fullname']) ?></span>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                        <a href="index.php?url=admin" class="rounded-full bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition">Admin</a>
+                    <?php endif; ?>
+                    <a href="index.php?url=logout" class="rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-white hover:bg-red-600 transition">Đăng xuất</a>
+                </div>
+            <?php else: ?>
+                <a href="index.php?url=login" class="rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
+            <?php endif; ?>
+        </div>
     </div>
 </nav>
 <main class="pt-28 pb-16">
@@ -118,5 +131,6 @@ function validateForm() {
     return isValid;
 }
 </script>
+<script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

@@ -66,15 +66,15 @@ class NewsController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $comment = new NewsComment($this->db);
             
-            $comment->post_id = $_POST['post_id'] ?? $_POST['news_id'] ?? null;
-            $comment->user_name = $_SESSION['username'] ?? $_POST['user_name'];
+            $comment->news_id = $_POST['news_id'] ?? $_POST['post_id'] ?? null;
+            $comment->user_id = $_SESSION['user_id'] ?? null;
             $comment->content = $_POST['content'];
             $comment->status = 'pending';
 
-            if ($comment->post_id && $comment->create()) {
+            if ($comment->news_id && $comment->user_id && $comment->create()) {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             } else {
-                echo "Lỗi: Không nhận được ID bài viết.";
+                echo "Lỗi: Không nhận được ID bài viết hoặc bạn chưa đăng nhập.";
             }
         }
     }

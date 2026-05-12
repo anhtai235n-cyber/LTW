@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans antialiased">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
@@ -19,7 +20,7 @@
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="max-w-7xl mx-auto px-6 py-8 scroll-reveal reveal-from-bottom reveal-delay-150">
         <!-- Header -->
         <div class="mb-8 border-b border-slate-200 pb-6">
             <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Tìm kiếm Tour</h1>
@@ -134,16 +135,16 @@
 
                                 <!-- Content -->
                                 <div class="p-5">
-                                    <h3 class="text-lg font-bold text-slate-900 line-clamp-2 mb-2">
+                                    <h3 class="text-lg font-bold text-slate-900 break-words whitespace-normal mb-2">
                                         <?= htmlspecialchars($tour['name']) ?>
                                     </h3>
                                     
                                     <div class="space-y-2 mb-4 text-sm text-slate-600">
-                                        <p class="flex items-center gap-2">
+                                        <p class="flex items-center gap-2 break-words whitespace-normal">
                                             <span class="material-symbols-outlined text-base text-blue-700">location_on</span>
                                             <?= htmlspecialchars($tour['location'] ?? 'Chưa cập nhật') ?>
                                         </p>
-                                        <p class="flex items-center gap-2">
+                                        <p class="flex items-center gap-2 break-words whitespace-normal">
                                             <span class="material-symbols-outlined text-base text-blue-700">schedule</span>
                                             <?= htmlspecialchars($tour['duration'] ?? 'Chưa cập nhật') ?>
                                         </p>

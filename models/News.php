@@ -39,7 +39,9 @@ class News {
     }
 
     public function readBySlug() {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE slug = ? LIMIT 1";
+        $query = "SELECT n.*, u.fullname AS author_name FROM " . $this->table_name . " n " .
+                 "LEFT JOIN users u ON n.author_id = u.id " .
+                 "WHERE n.slug = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->slug);
         $stmt->execute();
@@ -52,7 +54,7 @@ class News {
             $this->description = $row['description'];
             $this->image_url = $row['image_url'];
             $this->created_at = $row['created_at'];
-            $this->author_name = $row['author_name'];
+            $this->author_name = $row['author_name'] ?? 'Admin';
             $this->keywords = $row['keywords'];
             $this->views = $row['views'];
             $this->status = $row['status'];

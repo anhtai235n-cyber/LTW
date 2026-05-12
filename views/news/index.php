@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
     
     <style>
         .line-clamp-3 {
@@ -29,7 +30,7 @@
         </div>
     </nav>
 
-    <section class="py-16 bg-blue-700 text-white text-center">
+    <section class="py-16 bg-blue-700 text-white text-center scroll-reveal reveal-from-bottom reveal-delay-150">
         <div class="max-w-4xl mx-auto px-6">
             <h1 class="text-4xl font-extrabold mb-4 text-white">Tin tức & Cẩm nang du lịch</h1>
             <p class="text-blue-100 text-lg mb-8">Cập nhật những xu hướng và kinh nghiệm du lịch mới nhất</p>
@@ -47,7 +48,7 @@
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-6 py-16">
+    <section class="max-w-6xl mx-auto px-6 py-16 scroll-reveal reveal-from-left reveal-delay-150">
         <div class="flex flex-col gap-8">
             <?php if (empty($news)): ?>
                 <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
@@ -57,7 +58,7 @@
                 </div>
             <?php else: ?>
                 <?php foreach ($news as $post): ?>
-                    <div class="group bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover-shadow transition-all duration-300">
+                    <div class="group bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover-shadow transition-all duration-300 scroll-reveal reveal-from-bottom reveal-delay-150">
                         <div class="flex flex-col md:flex-row">
                             <!-- Image -->
                             <div class="md:w-1/3 h-64 md:h-auto overflow-hidden">
@@ -104,5 +105,6 @@
             <?php endif; ?>
         </div>
     </section>
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

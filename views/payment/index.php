@@ -25,14 +25,16 @@ $total_price = $tourModel->price * $guests;
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
     </style>
+    <link rel="stylesheet" href="/public/css/scrollAnimations.css">
 </head>
 <body class="text-slate-800 antialiased">
 
-<div class="max-w-6xl mx-auto px-4 py-12">
+<div class="max-w-6xl mx-auto px-4 py-12 scroll-reveal reveal-from-bottom reveal-delay-150">
     <div class="mb-8">
         <a href="/tour?id=<?= $tour_id ?>" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition">
             <span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Quay lại chi tiết tour

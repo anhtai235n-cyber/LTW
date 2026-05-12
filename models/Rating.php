@@ -41,7 +41,19 @@ class Rating {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->tour_id);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return [
+            'count' => (int) ($data['total_ratings'] ?? 0),
+            'average' => $data['average_rating'] !== null ? (float) $data['average_rating'] : 0.0,
+            'distribution' => [
+                5 => (int) ($data['five_star'] ?? 0),
+                4 => (int) ($data['four_star'] ?? 0),
+                3 => (int) ($data['three_star'] ?? 0),
+                2 => (int) ($data['two_star'] ?? 0),
+                1 => (int) ($data['one_star'] ?? 0),
+            ],
+        ];
     }
 
     // Kiểm tra user đã rate tour này chưa
