@@ -1,46 +1,36 @@
 <?php
 class News {
     private $conn;
-    private $table_name = "news";
+    private $table_name = "news"; 
 
     public $id;
     public $title;
     public $slug;
     public $content;
-    public $description;
-    public $keywords;
-    public $image_url;
-    public $author_id;
-    public $author_name;
-    public $status;
-    public $views;
+    public $description; 
+    public $image_url;   
     public $created_at;
-    public $updated_at;
+    public $author_name;
+    public $keywords; 
+    public $views;
+    public $status;
+
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Lấy tất cả bài viết (published)
     public function readAll() {
-        $query = "SELECT n.*, u.fullname as author_name FROM " . $this->table_name . " n 
-                  LEFT JOIN users u ON n.author_id = u.id 
-                  WHERE n.status = 'published' ORDER BY n.created_at DESC";
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
 
-    // Tìm kiếm bài viết
     public function search($keyword) {
-        $query = "SELECT n.*, u.fullname as author_name FROM " . $this->table_name . " n 
-                  LEFT JOIN users u ON n.author_id = u.id
-                  WHERE n.status = 'published' AND (
-                    n.title LIKE :keyword OR 
-                    n.content LIKE :keyword OR 
-                    n.keywords LIKE :keyword
-                  ) 
-                  ORDER BY n.created_at DESC";
+        $query = "SELECT * FROM " . $this->table_name . " 
+                  WHERE title LIKE :keyword OR description LIKE :keyword 
+                  ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
         $keyword = "%".$keyword."%";
         $stmt->bindParam(':keyword', $keyword);
@@ -48,11 +38,8 @@ class News {
         return $stmt;
     }
 
-    // Lấy bài viết theo slug
     public function readBySlug() {
-        $query = "SELECT n.*, u.fullname as author_name FROM " . $this->table_name . " n 
-                  LEFT JOIN users u ON n.author_id = u.id
-                  WHERE n.slug = ? AND n.status = 'published' LIMIT 1";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE slug = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->slug);
         $stmt->execute();
@@ -63,31 +50,31 @@ class News {
             $this->title = $row['title'];
             $this->content = $row['content'];
             $this->description = $row['description'];
-            $this->keywords = $row['keywords'];
             $this->image_url = $row['image_url'];
-            $this->author_id = $row['author_id'];
-            $this->author_name = $row['author_name'];
-            $this->status = $row['status'];
-            $this->views = $row['views'];
             $this->created_at = $row['created_at'];
-            $this->updated_at = $row['updated_at'];
-            
-            // Tăng view count
-            $this->incrementViews();
-            
+            $this->author_name = $row['author_name'];
+            $this->keywords = $row['keywords'];
+            $this->views = $row['views'];
+            $this->status = $row['status'];
             return true;
         }
         return false;
     }
 
-    // Lấy bài viết theo ID
-    public function readById() {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 1";
+    public function delete() {
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);
+        return $stmt->execute();
+    }
+
+    public function readbyID() {
+        $query = "SELECT * FROM news WHERE id = ? LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if($row) {
             $this->title = $row['title'];
             $this->slug = $row['slug'];
@@ -95,82 +82,82 @@ class News {
             $this->description = $row['description'];
             $this->keywords = $row['keywords'];
             $this->image_url = $row['image_url'];
-            $this->author_id = $row['author_id'];
             $this->status = $row['status'];
-            $this->views = $row['views'];
-            $this->created_at = $row['created_at'];
-            $this->updated_at = $row['updated_at'];
             return true;
         }
         return false;
     }
+    
+    public function update() {
+        $query = "UPDATE " . $this->table_name . "
+                SET 
+                    title = :title,
+                    slug = :slug,
+                    content = :content,
+                    image_url = :image_url,
+                    status = :status,
+                    author_name = :author_name,
+                    keywords = :keywords
+                WHERE id = :id";
 
-    // Tăng view count
-    public function incrementViews() {
-        $query = "UPDATE " . $this->table_name . " SET views = views + 1 WHERE id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->id);
-        return $stmt->execute();
-    }
-
-    // Thêm bài viết mới (admin)
-    public function create() {
-        $query = "INSERT INTO " . $this->table_name . " 
-                  SET title=:title, slug=:slug, content=:content, description=:description, 
-                      keywords=:keywords, image_url=:image_url, author_id=:author_id, status=:status";
-        
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":title", $this->title);
-        $stmt->bindParam(":slug", $this->slug);
-        $stmt->bindParam(":content", $this->content);
-        $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":keywords", $this->keywords);
-        $stmt->bindParam(":image_url", $this->image_url);
-        $stmt->bindParam(":author_id", $this->author_id);
-        $stmt->bindParam(":status", $this->status);
+        $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':slug', $this->slug);
+        $stmt->bindParam(':content', $this->content);
+        $stmt->bindParam(':image_url', $this->image_url);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':author_name', $this->author_name);
+        $stmt->bindParam(':keywords', $this->keywords);
+        $stmt->bindParam(':id', $this->id);
 
         if($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
             return true;
         }
         return false;
     }
 
-    // Cập nhật bài viết (admin)
-    public function update() {
-        $query = "UPDATE " . $this->table_name . " 
-                  SET title=:title, slug=:slug, content=:content, description=:description, 
-                      keywords=:keywords, status=:status";
-        
-        if($this->image_url != null) {
-            $query .= ", image_url=:image_url";
-        }
-        $query .= " WHERE id = :id";
+    public function create() {
+        $query = "INSERT INTO " . $this->table_name . "
+                SET 
+                    title = :title,
+                    slug = :slug,
+                    content = :content,
+                    image_url = :image_url,
+                    status = :status,
+                    keywords = :keywords,
+                    author_id = :author_id,
+                    created_at = :created_at";
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":title", $this->title);
-        $stmt->bindParam(":slug", $this->slug);
-        $stmt->bindParam(":content", $this->content);
-        $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":keywords", $this->keywords);
-        $stmt->bindParam(":status", $this->status);
-        $stmt->bindParam(":id", $this->id);
-        
-        if($this->image_url != null) {
-            $stmt->bindParam(":image_url", $this->image_url);
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->slug = htmlspecialchars(strip_tags($this->slug));
+        $this->keywords = htmlspecialchars(strip_tags($this->keywords ?? ''));
+        $this->created_at = date('Y-m-d H:i:s');
+
+        $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':slug', $this->slug);
+        $stmt->bindParam(':content', $this->content);
+        $stmt->bindParam(':image_url', $this->image_url);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':keywords', $this->keywords);
+        $stmt->bindParam(':author_id', $this->author_id);
+        $stmt->bindParam(':created_at', $this->created_at);
+
+        if($stmt->execute()) {
+            return true;
         }
-
-        return $stmt->execute();
+        return false;
     }
 
-    // Xoá bài viết (admin)
-    public function delete() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+    public function readOne($id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->id);
-        return $stmt->execute();
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
 }
-?>

@@ -14,7 +14,6 @@ class NewsController {
     public function index() {
         $newsModel = new News($this->db);
         
-        // Kiểm tra có tìm kiếm không
         if(isset($_GET['search'])) {
             $keyword = $_GET['search'];
             $stmt = $newsModel->search($keyword);
@@ -51,9 +50,8 @@ class NewsController {
                 'created_at' => $newsModel->created_at
             ];
 
-            // Lấy bình luận
             $commentModel = new NewsComment($this->db);
-            $commentModel->news_id = $newsModel->id;
+            $commentModel->post_id = $newsModel->id;
             $stmtComments = $commentModel->getByNewsId();
             $comments = $stmtComments->fetchAll(PDO::FETCH_ASSOC);
 
@@ -65,25 +63,19 @@ class NewsController {
     }
 
     public function submitComment() {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if(!isset($_SESSION['user_id'])) {
-                header("Location: ?url=login");
-                exit;
-            }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $comment = new NewsComment($this->db);
+            
+            $comment->post_id = $_POST['post_id'] ?? $_POST['news_id'] ?? null;
+            $comment->user_name = $_SESSION['username'] ?? $_POST['user_name'];
+            $comment->content = $_POST['content'];
+            $comment->status = 'pending';
 
-            $commentModel = new NewsComment($this->db);
-            $commentModel->news_id = $_POST['news_id'];
-            $commentModel->user_id = $_SESSION['user_id'];
-            $commentModel->content = $_POST['content'];
-
-            if($commentModel->create()) {
-                $_SESSION['comment_success'] = "Bình luận của bạn đã được gửi và chờ duyệt.";
+            if ($comment->post_id && $comment->create()) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             } else {
-                $_SESSION['comment_error'] = "Lỗi khi gửi bình luận.";
+                echo "Lỗi: Không nhận được ID bài viết.";
             }
-
-            header("Location: ?url=news/" . $_POST['slug']);
-            exit;
         }
     }
 }

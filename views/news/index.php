@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tin Tức | CloudJourney</title>
+    <title><?= isset($pageTitle) ? $pageTitle : 'Tin Tức' ?> | CloudJourney</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+        .hover-shadow:hover { transform: translateY(-5px); transition: 0.3s; }
+    </style>
 </head>
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
@@ -19,99 +29,80 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-12">
-        <!-- Header -->
-        <div class="mb-12">
-            <h1 class="text-4xl font-extrabold text-slate-900 mb-3">Tin Tức & Blog</h1>
-            <p class="text-lg text-slate-600">Cập nhật những bài viết mới nhất về du lịch và các địa điểm thú vị</p>
-        </div>
-
-        <!-- Search Bar -->
-        <div class="mb-10">
-            <form method="GET" action="index.php" class="flex gap-2">
+    <section class="py-16 bg-blue-700 text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="text-4xl font-extrabold mb-4 text-white">Tin tức & Cẩm nang du lịch</h1>
+            <p class="text-blue-100 text-lg mb-8">Cập nhật những xu hướng và kinh nghiệm du lịch mới nhất</p>
+            
+            <form action="index.php" method="GET" class="relative max-w-2xl mx-auto">
                 <input type="hidden" name="url" value="news">
-                <input type="text" name="search" placeholder="Tìm kiếm tin tức..." 
-                       value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>"
-                       class="flex-1 px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg transition">
+                <input type="text" name="search" 
+                       class="w-full pl-6 pr-16 py-4 rounded-full text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-500/30" 
+                       placeholder="Tìm kiếm bài viết..." 
+                       value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                <button type="submit" class="absolute right-2 top-2 bg-orange-500 hover:bg-orange-600 text-white p-3 rounded-full transition">
                     <span class="material-symbols-outlined">search</span>
                 </button>
             </form>
         </div>
+    </section>
 
-        <!-- News Articles Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <?php if(isset($news) && count($news) > 0): ?>
-                <?php foreach($news as $article): ?>
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-slate-200">
-                        <!-- Image -->
-                        <?php if(!empty($article['image_url'])): ?>
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden">
-                                <img src="<?= htmlspecialchars($article['image_url']) ?>" alt="<?= htmlspecialchars($article['title']) ?>" 
-                                     class="w-full h-full object-cover hover:scale-110 transition transform">
-                            </div>
-                        <?php else: ?>
-                            <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-white text-6xl">landscape</span>
-                            </div>
-                        <?php endif; ?>
-
-                        <!-- Content -->
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-3">
-                                <span class="text-xs font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-                                    <?= $article['status'] === 'published' ? 'Công khai' : 'Nháp' ?>
-                                </span>
-                                <span class="text-xs text-slate-500">
-                                    <span class="material-symbols-outlined text-xs">visibility</span>
-                                    <?= number_format($article['views'] ?? 0) ?> lượt xem
-                                </span>
-                            </div>
-
-                            <h2 class="text-xl font-bold text-slate-900 mb-2 line-clamp-2">
-                                <?= htmlspecialchars($article['title']) ?>
-                            </h2>
-
-                            <p class="text-slate-600 mb-4 line-clamp-3">
-                                <?= htmlspecialchars($article['description'] ?? substr(strip_tags($article['content']), 0, 150)) ?>
-                            </p>
-
-                            <!-- Metadata -->
-                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4 pb-4 border-b border-slate-200">
-                                <span class="flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-sm">calendar_today</span>
-                                    <?= date('d/m/Y', strtotime($article['created_at'] ?? 'now')) ?>
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-sm">person</span>
-                                    <?= htmlspecialchars($article['author_name'] ?? 'Admin') ?>
-                                </span>
-                            </div>
-
-                            <!-- Read More -->
-                            <a href="index.php?url=news/<?= htmlspecialchars($article['slug']) ?>" 
-                               class="inline-flex items-center text-blue-700 font-semibold hover:text-blue-900 transition">
-                                Đọc tiếp
-                                <span class="material-symbols-outlined text-sm ml-2">arrow_forward</span>
-                            </a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="col-span-full text-center py-12">
-                    <span class="material-symbols-outlined text-6xl text-slate-300 block mx-auto mb-4">article</span>
-                    <p class="text-slate-500 text-lg">
-                        <?php 
-                        if(isset($_GET['search']) && !empty($_GET['search'])) {
-                            echo "Không tìm thấy bài viết nào phù hợp với từ khóa \"" . htmlspecialchars($_GET['search']) . "\"";
-                        } else {
-                            echo "Chưa có bài viết nào.";
-                        }
-                        ?>
-                    </p>
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="flex flex-col gap-8">
+            <?php if (empty($news)): ?>
+                <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
+                    <span class="material-symbols-outlined text-6xl text-slate-300 mb-4">search_off</span>
+                    <p class="text-slate-500 text-xl">Không tìm thấy bài viết nào phù hợp.</p>
+                    <a href="index.php?url=news" class="mt-4 inline-block text-blue-600 font-bold hover:underline">Xem tất cả bài viết</a>
                 </div>
+            <?php else: ?>
+                <?php foreach ($news as $post): ?>
+                    <div class="group bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover-shadow transition-all duration-300">
+                        <div class="flex flex-col md:flex-row">
+                            <!-- Image -->
+                            <div class="md:w-1/3 h-64 md:h-auto overflow-hidden">
+                                <a href="index.php?url=news/<?= $post['slug'] ?>">
+                                    <?php if(!empty($post['image'])): ?>
+                                        <img src="public/uploads/news/<?= $post['image'] ?>" 
+                                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
+                                             alt="<?= htmlspecialchars($post['title']) ?>">
+                                    <?php else: ?>
+                                        <div class="w-full h-full bg-slate-100 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-slate-300 text-5xl">image</span>
+                                        </div>
+                                    <?php endif; ?>
+                                </a>
+                            </div>
+
+                            <div class="md:w-2/3 p-8 flex flex-col justify-center">
+                                <div class="flex items-center gap-3 text-sm text-slate-500 mb-3">
+                                    <span class="flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                        <?= date('d/m/Y', strtotime($post['created_at'])) ?>
+                                    </span>
+                                </div>
+                                
+                                <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition">
+                                    <a href="index.php?url=news/<?= $post['slug'] ?>">
+                                        <?= htmlspecialchars($post['title']) ?>
+                                    </a>
+                                </h3>
+                                
+                                <p class="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+                                    <?= htmlspecialchars($post['description']) ?>
+                                </p>
+                                
+                                <a href="index.php?url=news/<?= $post['slug'] ?>" 
+                                   class="inline-flex items-center font-bold text-blue-600 hover:text-blue-800 transition">
+                                    Đọc tiếp 
+                                    <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             <?php endif; ?>
         </div>
-    </main>
+    </section>
 </body>
 </html>
