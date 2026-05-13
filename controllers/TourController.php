@@ -10,9 +10,30 @@ class TourController {
         $this->db = $database->getConnection();
     }
 
+    public function all() {
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        if ($page < 1) $page = 1;
+
+        $perPage = 10;
+        $offset = ($page - 1) * $perPage;
+
+        require_once 'models/Tour.php';
+        $tourModel = new Tour($this->db);
+
+        $tours = $tourModel->readActiveToursPaginated($perPage, $offset);
+        $totalTours = $tourModel->countActiveTours();
+
+        $totalPages = (int)ceil($totalTours / $perPage);
+        if ($totalPages < 1) $totalPages = 1;
+        if ($page > $totalPages) $page = $totalPages;
+
+        $pageTitle = 'Tất cả tour';
+        require_once 'views/tour/all.php';
+    }
+
     public function detail() {
         if (!isset($_GET['id'])) {
-            header("Location: ?url=home");
+            header("Location: /index.php?url=home");
             exit;
         }
 
@@ -90,7 +111,7 @@ class TourController {
                 $_SESSION['rating_error'] = "Lỗi khi gửi đánh giá!";
             }
 
-            header("Location: ?url=tour&id=" . $_POST['tour_id']);
+            header("Location: /index.php?url=tour&id=" . $_POST['tour_id']);
             exit;
         }
     }

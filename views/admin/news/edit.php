@@ -70,7 +70,7 @@
         </div>
 
         <div class="flex justify-end gap-4 mt-8">
-            <a href="/admin/news"
+            <a href="/index.php?url=admin/news"
                 class="px-6 py-3 bg-surface-container-high text-on-surface rounded-xl font-bold hover:bg-surface-container-highest transition-colors">Hủy</a>
             <button type="submit"
                 class="px-6 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">Lưu

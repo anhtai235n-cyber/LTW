@@ -4,7 +4,7 @@
 </header>
 
 <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm">
-    <form action="/admin/tours_update" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="/index.php?url=admin/tours_update" method="POST" enctype="multipart/form-data" class="space-y-6">
         <input type="hidden" name="id" value="<?= $tour['id'] ?>">
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -78,7 +78,7 @@
         </div>
 
         <div class="flex justify-end gap-4 mt-8">
-            <a href="/admin/tours" class="px-6 py-3 bg-surface-container-high text-on-surface rounded-xl font-bold hover:bg-surface-container-highest transition-colors">Hủy</a>
+            <a href="/index.php?url=admin/tours" class="px-6 py-3 bg-surface-container-high text-on-surface rounded-xl font-bold hover:bg-surface-container-highest transition-colors">Hủy</a>
             <button type="submit" class="px-6 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">Lưu Thay Đổi</button>
         </div>
     </form>

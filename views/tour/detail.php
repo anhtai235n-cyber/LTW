@@ -16,8 +16,8 @@
 <body class="bg-[#faf8ff] text-slate-800 font-sans">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm fade-in">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.php?url=home" class="text-2xl font-bold text-slate-900">CloudJourney</a>
-            <a href="index.php?url=home" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+            <a href="/index.php?url=home" class="text-2xl font-bold text-slate-900">CloudJourney</a>
+            <a href="/index.php?url=home" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
                 <span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Quay lại
             </a>
         </div>
@@ -26,7 +26,7 @@
     <main class="max-w-7xl mx-auto px-6 py-12 fade-in">
         <!-- Main Image -->
         <div class="mb-8 rounded-3xl overflow-hidden shadow-xl h-96 bg-slate-200 fade-in">
-            <img src="<?= !empty($tour['image_url']) ? '/' . htmlspecialchars($tour['image_url']) : 'uploads/picture1.jfif' ?>" 
+            <img src="<?= !empty($tour['image_url']) ? '/' . htmlspecialchars($tour['image_url']) : '/uploads/picture1.jfif' ?>" 
                 alt="<?= htmlspecialchars($tour['name']) ?>" 
                 class="w-full h-full object-cover transition duration-700 ease-out hover:scale-105">
         </div>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
 
-                        <a href="index.php?url=payment&tour_id=<?= $tour['id'] ?>&date=<?= date('Y-m-d') ?>&guests=1" 
+                        <a href="/index.php?url=payment&tour_id=<?= $tour['id'] ?>&date=<?= date('Y-m-d') ?>&guests=1" 
                             id="bookBtn" 
                             class="block w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition text-center mt-6">
                             Đặt Tour Ngay

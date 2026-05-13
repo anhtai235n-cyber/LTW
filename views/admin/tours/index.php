@@ -5,7 +5,7 @@
         <p class="text-on-surface-variant mt-1">Cập nhật và điều chỉnh các hành trình khám phá.</p>
     </div>
     <div class="flex items-center gap-4">
-        <a href="/admin/tours_create" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+        <a href="/index.php?url=admin/tours_create" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
             <span class="material-symbols-outlined">add</span>
             Thêm tour mới
         </a>
@@ -77,10 +77,10 @@
                             <?php endif; ?>
                         </td>
                         <td class="px-8 py-5 text-right space-x-2">
-                            <a href="/admin/tours_edit?id=<?= $tour['id'] ?>" class="inline-block p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+                            <a href="/index.php?url=admin/tours_edit?id=<?= $tour['id'] ?>" class="inline-block p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-xl">edit</span>
                             </a>
-                            <a href="/admin/tours_delete?id=<?= $tour['id'] ?>" onclick="return confirm('Bạn có chắc muốn xoá?')" class="inline-block p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+                            <a href="/index.php?url=admin/tours_delete?id=<?= $tour['id'] ?>" onclick="return confirm('Bạn có chắc muốn xoá?')" class="inline-block p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-xl">delete</span>
                             </a>
                         </td>

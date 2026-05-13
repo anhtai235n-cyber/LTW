@@ -13,8 +13,8 @@
 <body class="bg-[#faf8ff] text-slate-800 font-sans antialiased">
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.php?url=home" class="text-2xl font-bold text-slate-900">CloudJourney</a>
-            <a href="index.php?url=home" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+            <a href="/index.php?url=home" class="text-2xl font-bold text-slate-900">CloudJourney</a>
+            <a href="/index.php?url=home" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
                 <span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Quay lại
             </a>
         </div>
@@ -30,7 +30,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <!-- Sidebar Filters -->
             <aside class="lg:col-span-1">
-                <form method="GET" action="index.php" class="sticky top-24 space-y-6">
+                <form method="GET" action="/index.php" class="sticky top-24 space-y-6">
                     <input type="hidden" name="url" value="search">
                     
                     <!-- Location Filter -->
@@ -103,7 +103,7 @@
                         <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-sm">search</span> Tìm kiếm
                         </button>
-                        <a href="index.php?url=search" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                        <a href="/index.php?url=search" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-sm">refresh</span> Đặt lại bộ lọc
                         </a>
                     </div>
@@ -118,7 +118,7 @@
                             <article class="group overflow-hidden rounded-2xl bg-white shadow-sm border border-slate-200 hover:shadow-xl transition duration-300">
                                 <!-- Image -->
                                 <div class="relative h-52 overflow-hidden bg-slate-200">
-                                    <img src="<?= !empty($tour['image_url']) ? '/' . htmlspecialchars($tour['image_url']) : 'uploads/picture1.jfif' ?>" 
+                                    <img src="<?= !empty($tour['image_url']) ? '/' . htmlspecialchars($tour['image_url']) : '/uploads/picture1.jfif' ?>" 
                                         alt="<?= htmlspecialchars($tour['name']) ?>" 
                                         class="h-full w-full object-cover group-hover:scale-110 transition duration-500">
                                     
@@ -156,7 +156,7 @@
                                     </p>
 
                                     <!-- Button -->
-                                    <a href="index.php?url=tour&id=<?= $tour['id'] ?>" 
+                                    <a href="/index.php?url=tour&id=<?= $tour['id'] ?>" 
                                         class="block w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-xl transition text-center">
                                         Xem chi tiết
                                     </a>
@@ -173,7 +173,7 @@
                             Rất tiếc, không có tour nào phù hợp với tiêu chí tìm kiếm của bạn.<br>
                             Vui lòng thử lại với các bộ lọc khác.
                         </p>
-                        <a href="index.php?url=search" class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition">
+                        <a href="/index.php?url=search" class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl transition">
                             <span class="material-symbols-outlined text-sm">refresh</span> Đặt lại bộ lọc
                         </a>
                     </div>
@@ -185,4 +185,5 @@
     <!-- Footer spacing -->
     <div class="h-12"></div>
 </body>
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </html>

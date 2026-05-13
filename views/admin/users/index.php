@@ -5,7 +5,7 @@
             <h1 class="text-3xl font-bold text-on-surface">Quản lý Người dùng</h1>
             <p class="text-on-surface-variant mt-2">Tổng cộng: <strong><?= count($users) ?></strong> người dùng</p>
         </div>
-        <a href="/admin/users/create" class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+        <a href="/index.php?url=admin/users/create" class="flex items-center gap-2 px-6 py-3 bg-blue-700 text-white rounded-xl font-bold hover:bg-blue-800 transition-colors">
             <span class="material-symbols-outlined">add</span>
             <span>Tạo Admin mới</span>
         </a>
@@ -77,28 +77,28 @@
                                     <div class="flex items-center justify-center gap-2">
                                         <!-- Nút Nâng cấp/Hạ xuống -->
                                         <?php if($user['role'] === 'member'): ?>
-                                            <a href="/admin/users/promote?id=<?= $user['id'] ?>" title="Nâng cấp thành Admin" class="p-2 hover:bg-primary-container rounded transition-colors">
+                                            <a href="/index.php?url=admin/users/promote?id=<?= $user['id'] ?>" title="Nâng cấp thành Admin" class="p-2 hover:bg-primary-container rounded transition-colors">
                                                 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">grade</span>
                                             </a>
                                         <?php else: ?>
-                                            <a href="/admin/users/demote?id=<?= $user['id'] ?>" title="Hạ xuống Member" class="p-2 hover:bg-red-100 rounded transition-colors">
+                                            <a href="/index.php?url=admin/users/demote?id=<?= $user['id'] ?>" title="Hạ xuống Member" class="p-2 hover:bg-red-100 rounded transition-colors">
                                                 <span class="material-symbols-outlined text-red-600">trending_down</span>
                                             </a>
                                         <?php endif; ?>
 
                                         <!-- Nút Khóa/Mở khóa -->
                                         <?php if($user['status'] === 'active'): ?>
-                                            <a href="/admin/users/ban?id=<?= $user['id'] ?>" title="Khóa tài khoản" class="p-2 hover:bg-red-100 rounded transition-colors" onclick="return confirm('Xác nhận khóa tài khoản này?')">
+                                            <a href="/index.php?url=admin/users/ban?id=<?= $user['id'] ?>" title="Khóa tài khoản" class="p-2 hover:bg-red-100 rounded transition-colors" onclick="return confirm('Xác nhận khóa tài khoản này?')">
                                                 <span class="material-symbols-outlined text-red-600">lock</span>
                                             </a>
                                         <?php else: ?>
-                                            <a href="/admin/users/unban?id=<?= $user['id'] ?>" title="Mở khóa tài khoản" class="p-2 hover:bg-green-100 rounded transition-colors">
+                                            <a href="/index.php?url=admin/users/unban?id=<?= $user['id'] ?>" title="Mở khóa tài khoản" class="p-2 hover:bg-green-100 rounded transition-colors">
                                                 <span class="material-symbols-outlined text-green-600">lock_open</span>
                                             </a>
                                         <?php endif; ?>
 
                                         <!-- Nút Xóa -->
-                                        <a href="/admin/users/delete?id=<?= $user['id'] ?>" title="Xóa tài khoản" class="p-2 hover:bg-red-100 rounded transition-colors" onclick="return confirm('Bạn chắc chắn muốn xóa tài khoản này không? Hành động này không thể hoàn tác!')">
+                                        <a href="/index.php?url=admin/users/delete?id=<?= $user['id'] ?>" title="Xóa tài khoản" class="p-2 hover:bg-red-100 rounded transition-colors" onclick="return confirm('Bạn chắc chắn muốn xóa tài khoản này không? Hành động này không thể hoàn tác!')">
                                             <span class="material-symbols-outlined text-red-600">delete</span>
                                         </a>
                                     </div>
@@ -111,3 +111,4 @@
         </div>
     </div>
 </div>
+

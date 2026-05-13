@@ -1,11 +1,16 @@
 <?php
 // 1. Khởi tạo session và kết nối database [cite: 11, 73]
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require_once 'config/database.php';
+require_once 'config/Logger.php';
 
 // 2. Lấy URL để biết người dùng muốn vào trang nào [cite: 17]
 // Ví dụ: localhost:4545/contact -> trang liên hệ
 $url = isset($_GET['url']) ? $_GET['url'] : 'home';
+Logger::info("Request route: {$url} | Remote IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
 
 // 3. Gọi Controller tương ứng
 $urlParts = explode('/', rtrim($url, '/'));
@@ -71,6 +76,10 @@ elseif ($url == 'home') {
     require_once 'controllers/TourController.php';
     $tourController = new TourController();
     $tourController->detail();
+} elseif ($url == 'tour_all') {
+    require_once 'controllers/TourController.php';
+    $tourController = new TourController();
+    $tourController->all();
 } elseif ($url == 'tour/rate') {
     require_once 'controllers/TourController.php';
     $tourController = new TourController();
@@ -112,7 +121,7 @@ elseif ($url == 'home') {
     require_once 'controllers/FAQController.php';
     $faqController = new FAQController();
     $faqController->index();
-} elseif ($url == 'profile') {
+} elseif ($urlParts[0] == 'profile') {
     require_once 'controllers/ProfileController.php';
     $profileController = new ProfileController();
     $action = isset($urlParts[1]) ? $urlParts[1] : 'index';

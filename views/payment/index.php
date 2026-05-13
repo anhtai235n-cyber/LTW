@@ -1,17 +1,23 @@
 <?php
-require_once 'config/database.php';
-require_once 'models/Tour.php';
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/Tour.php';
 
 $db = (new Database())->getConnection();
 $tourModel = new Tour($db);
 
-$tour_id = $_GET['tour_id'] ?? 0;
+$tour_id = isset($_GET['tour_id']) ? (int)$_GET['tour_id'] : 0;
 $date = $_GET['date'] ?? date('Y-m-d');
-$guests = $_GET['guests'] ?? 1;
+$guests = isset($_GET['guests']) ? max(1, (int)$_GET['guests']) : 1;
+
+if ($tour_id <= 0) {
+    header('Location: /index.php?url=home');
+    exit;
+}
 
 $tourModel->id = $tour_id;
 if (!$tourModel->readOne()) {
-    die("<div style='text-align:center; padding: 50px; font-family:sans-serif;'><h2>Không tìm thấy thông tin Tour!</h2><a href='/home'>Quay lại trang chủ</a></div>");
+    header('Location: /index.php?url=home');
+    exit;
 }
 
 $total_price = $tourModel->price * $guests;
@@ -36,7 +42,7 @@ $total_price = $tourModel->price * $guests;
 
 <div class="max-w-6xl mx-auto px-4 py-12 scroll-reveal reveal-from-bottom reveal-delay-150">
     <div class="mb-8">
-        <a href="/tour?id=<?= $tour_id ?>" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition">
+        <a href="/index.php?url=tour&id=<?= $tour_id ?>" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition">
             <span class="material-symbols-outlined text-sm mr-1">arrow_back</span> Quay lại chi tiết tour
         </a>
         <h1 class="text-3xl font-extrabold text-slate-900 mt-4">Hoàn tất đặt tour của bạn</h1>
@@ -50,7 +56,7 @@ $total_price = $tourModel->price * $guests;
                 <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-blue-600">person</span> Thông tin liên hệ
                 </h2>
-                <form action="index.php?url=booking_submit" method="POST" class="space-y-5">
+                <form action="/index.php?url=booking_submit" method="POST" class="space-y-5">
                     <input type="hidden" name="tour_id" value="<?= $tour_id ?>">
                     <input type="hidden" name="booking_date" value="<?= htmlspecialchars($date) ?>">
                     <input type="hidden" name="guests" value="<?= (int)$guests ?>">
@@ -68,6 +74,27 @@ $total_price = $tourModel->price * $guests;
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-2">Email *</label>
                             <input type="email" name="customer_email" required value="<?= $_SESSION['email'] ?? '' ?>" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600/50 outline-none" placeholder="email@example.com">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-5 mt-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Địa điểm khởi hành *</label>
+                            <input type="text" name="departure_location" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600/50 outline-none" placeholder="Ví dụ: Hà Nội, Sài Gòn, Đà Nẵng...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Phương thức di chuyển *</label>
+                            <select name="transport_method" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600/50 outline-none bg-white">
+                                <option value="">Chọn phương thức</option>
+                                <option value="Ô tô">Ô tô</option>
+                                <option value="Máy bay">Máy bay</option>
+                                <option value="Tàu hỏa">Tàu hỏa</option>
+                                <option value="Xe buýt">Xe buýt</option>
+                                <option value="Tự túc">Tự túc</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Yêu cầu đặc biệt</label>
+                            <textarea name="special_requests" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-600/50 outline-none" placeholder="Nhập yêu cầu đặc biệt, thực đơn, chỗ ngồi, hỗ trợ hành lý..."></textarea>
                         </div>
                     </div>
                     
@@ -109,6 +136,8 @@ $total_price = $tourModel->price * $guests;
                     <div class="flex justify-between"><span>Ngày khởi hành:</span> <span class="font-semibold text-slate-900"><?= date('d/m/Y', strtotime($date)) ?></span></div>
                     <div class="flex justify-between"><span>Thời gian:</span> <span class="font-semibold text-slate-900"><?= htmlspecialchars($tourModel->duration ?? 'Đang cập nhật') ?></span></div>
                     <div class="flex justify-between"><span>Số hành khách:</span> <span class="font-semibold text-slate-900"><?= htmlspecialchars($guests) ?> Người</span></div>
+                    <div class="flex justify-between"><span>Địa điểm khởi hành:</span> <span class="font-semibold text-slate-900">Chọn tại trang đặt</span></div>
+                    <div class="flex justify-between"><span>Phương thức:</span> <span class="font-semibold text-slate-900">Chọn tại trang đặt</span></div>
                 </div>
                 
                 <div class="mt-6 pt-6 border-t border-slate-100 flex justify-between items-end">
@@ -120,5 +149,6 @@ $total_price = $tourModel->price * $guests;
     </div>
 </div>
 
+    <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

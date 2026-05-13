@@ -54,7 +54,7 @@
                             </p>
                         </td>
                         <td class="px-6 py-5 text-center">
-                            <form action="/admin/contact_status" method="POST" class="inline-block">
+                            <form action="/index.php?url=admin/contact_status" method="POST" class="inline-block">
                                 <input type="hidden" name="id" value="<?= $contact['id'] ?>">
                                 <select name="status" onchange="this.form.submit()" class="text-xs font-bold rounded-full px-3 py-1 border-none focus:ring-0
                                     <?php 
@@ -73,7 +73,7 @@
                             <a href="mailto:<?= htmlspecialchars($contact['customer_email']) ?>" title="Gửi email phản hồi" class="inline-block p-2 text-outline hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-xl">reply</span>
                             </a>
-                            <a href="/admin/contact_delete?id=<?= $contact['id'] ?>" onclick="return confirm('Bạn có chắc muốn xoá liên hệ này?')" class="inline-block p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
+                            <a href="/index.php?url=admin/contact_delete?id=<?= $contact['id'] ?>" onclick="return confirm('Bạn có chắc muốn xoá liên hệ này?')" class="inline-block p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-xl">delete</span>
                             </a>
                         </td>

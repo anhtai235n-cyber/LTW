@@ -127,55 +127,69 @@
                                                         <?= htmlspecialchars($booking['tour_name']) ?>
                                                     </h3>
                                                     <p class="text-sm text-slate-500">
-                                                        Mã đặt tour: <?= htmlspecialchars($booking['booking_code'] ?? 'N/A') ?>
+                                                        Mã đặt: #<?= htmlspecialchars($booking['id']) ?>
                                                     </p>
                                                 </div>
-                                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold
-                                                    <?php 
-                                                    switch($booking['status'] ?? '') {
-                                                        case 'confirmed': echo 'bg-green-100 text-green-700'; break;
-                                                        case 'pending': echo 'bg-yellow-100 text-yellow-700'; break;
-                                                        case 'cancelled': echo 'bg-red-100 text-red-700'; break;
-                                                        default: echo 'bg-slate-100 text-slate-700';
+                                                <?php
+                                                    $statusLabel = 'Không rõ';
+                                                    $statusClass = 'bg-slate-100 text-slate-700';
+                                                    if ($booking['status'] === 'cancelled') {
+                                                        $statusLabel = 'Đã hủy';
+                                                        $statusClass = 'bg-red-100 text-red-700';
+                                                    } elseif ($booking['status'] === 'pending' && $booking['payment_method'] === 'transfer') {
+                                                        $statusLabel = 'Chờ thanh toán';
+                                                        $statusClass = 'bg-amber-100 text-amber-700';
+                                                    } elseif ($booking['status'] === 'pending') {
+                                                        $statusLabel = 'Chờ xác nhận';
+                                                        $statusClass = 'bg-yellow-100 text-yellow-700';
+                                                    } elseif ($booking['status'] === 'confirmed') {
+                                                        $statusLabel = 'Đã xác nhận';
+                                                        $statusClass = 'bg-green-100 text-green-700';
                                                     }
-                                                    ?>">
-                                                    <?php 
-                                                    $status_map = [
-                                                        'confirmed' => 'Đã xác nhận',
-                                                        'pending' => 'Chờ xác nhận',
-                                                        'cancelled' => 'Đã hủy'
-                                                    ];
-                                                    echo htmlspecialchars($status_map[$booking['status'] ?? ''] ?? 'Không rõ');
-                                                    ?>
+                                                ?>
+                                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold <?= $statusClass ?>">
+                                                    <?= htmlspecialchars($statusLabel) ?>
                                                 </span>
                                             </div>
 
                                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                                 <div>
-                                                    <p class="text-xs text-slate-500 uppercase">Ngày khởi hành</p>
-                                                    <p class="font-semibold text-slate-900">
-                                                        <?= date('d/m/Y', strtotime($booking['departure_date'] ?? 'now')) ?>
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-slate-500 uppercase">Số người</p>
-                                                    <p class="font-semibold text-slate-900">
-                                                        <?= htmlspecialchars($booking['number_of_people'] ?? '0') ?> người
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-slate-500 uppercase">Tổng tiền</p>
-                                                    <p class="font-bold text-orange-600">
-                                                        <?= number_format((float)($booking['total_price'] ?? 0), 0, ',', '.') ?>đ
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <p class="text-xs text-slate-500 uppercase">Ngày đặt</p>
+                                                    <p class="text-xs text-slate-500 uppercase">Ngày đi</p>
                                                     <p class="font-semibold text-slate-900">
                                                         <?= date('d/m/Y', strtotime($booking['booking_date'] ?? 'now')) ?>
                                                     </p>
                                                 </div>
+                                                <div>
+                                                    <p class="text-xs text-slate-500 uppercase">Số khách</p>
+                                                    <p class="font-semibold text-slate-900">
+                                                        <?= htmlspecialchars($booking['guests'] ?? '0') ?> người
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs text-slate-500 uppercase">Khởi hành từ</p>
+                                                    <p class="font-semibold text-slate-900">
+                                                        <?= htmlspecialchars($booking['departure_location'] ?? 'Chưa xác định') ?>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs text-slate-500 uppercase">Phương tiện</p>
+                                                    <p class="font-semibold text-slate-900">
+                                                        <?= htmlspecialchars($booking['transport_method'] ?? 'Chưa xác định') ?>
+                                                    </p>
+                                                </div>
                                             </div>
+                                            <?php if (!empty($booking['special_requests'])): ?>
+                                                <div class="mt-4 text-sm text-slate-600">
+                                                    <p class="text-xs uppercase text-slate-500">Yêu cầu đặc biệt</p>
+                                                    <p class="mt-2 whitespace-pre-line bg-slate-50 p-4 rounded-xl border border-slate-200"><?= htmlspecialchars($booking['special_requests']) ?></p>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if (!empty($booking['confirmation_message'])): ?>
+                                                <div class="mt-4 text-sm text-slate-700 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                                                    <p class="font-semibold">Thông tin xác nhận</p>
+                                                    <p class="mt-2"><?= htmlspecialchars($booking['confirmation_message']) ?></p>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -318,7 +332,7 @@
                 <div class="max-w-2xl mx-auto">
                     <h1 class="text-3xl font-bold text-slate-900 mb-8">Thông Tin Thanh Toán</h1>
 
-                    <form method="POST" action="index.php?url=profile/payment"
+                    <form method="POST" action="index.php?url=profile/paymentInfo"
                           class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-6">
 
                         <!-- Card Holder Name -->

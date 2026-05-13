@@ -152,25 +152,30 @@ class Tour {
     // 8. Tìm kiếm và lọc tour nâng cao
     public function searchAndFilter($filters = []) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE status = 'active'";
-        
+        $params = [];
+
         // Lọc theo location
         if (!empty($filters['location'])) {
-            $query .= " AND location LIKE '%" . $this->conn->quote($filters['location']) . "%'";
+            $query .= " AND location LIKE :location";
+            $params[':location'] = '%' . $filters['location'] . '%';
         }
-        
+
         // Lọc theo category
         if (!empty($filters['category']) && $filters['category'] !== 'all') {
-            $query .= " AND category = " . $this->conn->quote($filters['category']);
+            $query .= " AND category = :category";
+            $params[':category'] = $filters['category'];
         }
-        
+
         // Lọc theo khoảng giá
-        if (!empty($filters['min_price']) && is_numeric($filters['min_price'])) {
-            $query .= " AND price >= " . (float)$filters['min_price'];
+        if (is_numeric($filters['min_price'])) {
+            $query .= " AND price >= :min_price";
+            $params[':min_price'] = (float)$filters['min_price'];
         }
-        if (!empty($filters['max_price']) && is_numeric($filters['max_price'])) {
-            $query .= " AND price <= " . (float)$filters['max_price'];
+        if (is_numeric($filters['max_price'])) {
+            $query .= " AND price <= :max_price";
+            $params[':max_price'] = (float)$filters['max_price'];
         }
-        
+
         // Sắp xếp (sorting)
         $sortBy = isset($filters['sort']) ? $filters['sort'] : 'latest';
         switch($sortBy) {
@@ -189,8 +194,11 @@ class Tour {
             default: // latest
                 $query .= " ORDER BY created_at DESC";
         }
-        
+
         $stmt = $this->conn->prepare($query);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
         $stmt->execute();
         return $stmt;
     }
@@ -209,6 +217,28 @@ class Tour {
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // 11. Đếm tổng số tour active (phục vụ phân trang)
+    public function countActiveTours() {
+        $query = "SELECT COUNT(*) as total FROM " . $this->table_name . " WHERE status = 'active'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)($row['total'] ?? 0);
+    }
+
+    // 12. Lấy danh sách tour active theo LIMIT/OFFSET (phân trang)
+    public function readActiveToursPaginated($limit, $offset) {
+        $limit = (int)$limit;
+        $offset = (int)$offset;
+
+        $query = "SELECT * FROM " . $this->table_name . " WHERE status = 'active' ORDER BY id DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

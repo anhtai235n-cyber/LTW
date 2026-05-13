@@ -41,7 +41,7 @@
 <main class="pt-28 pb-16">
     <div class="max-w-5xl mx-auto px-6 md:px-8">
         <div class="rounded-[2rem] overflow-hidden shadow-2xl">
-            <div class="bg-[url('uploads/picture1.jfif')] bg-cover bg-center h-72 relative">
+            <div class="bg-[url('/uploads/picture1.jfif')] bg-cover bg-center h-72 relative">
                 <div class="absolute inset-0 bg-slate-950/50"></div>
                 <div class="relative z-10 flex h-full items-center justify-center">
                     <div class="text-center text-white px-6">

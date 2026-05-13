@@ -47,7 +47,7 @@
                         <?php endif; ?>
                     </td>
                     <td class="py-4 px-4">
-                        <form action="/admin/booking_status" method="POST" class="flex gap-2">
+                        <form action="/index.php?url=admin/booking_status" method="POST" class="flex gap-2">
                             <input type="hidden" name="id" value="<?= $booking['id'] ?>">
                             <select name="status" class="px-3 py-2 rounded-xl bg-surface-container border-none text-sm outline-none">
                                 <option value="pending" <?= $booking['status'] == 'pending' ? 'selected' : '' ?>>Chờ xử lý</option>

@@ -51,25 +51,40 @@
 <nav class="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm animate-fade-down animate-delay-200">
     <div class="max-w-7xl mx-auto px-6 md:px-8 h-24 flex items-center justify-between">
         <div class="flex items-center gap-8">
-            <a href="?url=home" class="text-2xl font-bold text-slate-900"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?></a>
+            <a href="/index.php?url=home" class="text-2xl font-bold text-slate-900"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?></a>
             <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
                 <a href="#destinations" class="hover:text-blue-700 transition">Khám phá</a>
-                <a href="index.php?url=about" class="hover:text-blue-700 transition">Về chúng tôi</a>
+                <a href="/index.php?url=about" class="hover:text-blue-700 transition">Về chúng tôi</a>
                 <a href="#features" class="hover:text-blue-700 transition">Lý do chọn</a>
                 <a href="#testimonials" class="hover:text-blue-700 transition">Đánh giá</a>
                 <a href="/contact" class="hover:text-blue-700 transition">Liên hệ</a>
-                <a href="index.php?url=news" class="hover:text-blue-700 transition">Tin tức</a>
+                <a href="/index.php?url=news" class="hover:text-blue-700 transition">Tin tức</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
             <button class="rounded-full border border-slate-300 px-4 py-2 text-sm text-slate-600 hover:bg-slate-100 transition">VN/EN</button>
+            <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                <a href="/index.php?url=admin" class="hidden md:inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">
+                    <span class="material-symbols-outlined text-sm mr-2">admin_panel_settings</span> Admin Dashboard
+                </a>
+            <?php endif; ?>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <div class="hidden md:flex items-center gap-4">
-                    <span class="text-sm font-medium text-slate-700">Xin chào, <?= htmlspecialchars($_SESSION['fullname']) ?></span>
-                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
-                        <a href="index.php?url=admin" class="rounded-full bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition">Admin</a>
-                    <?php endif; ?>
-                    <a href="/logout" class="rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-white hover:bg-red-600 transition">Đăng xuất</a>
+                <div class="relative group hidden md:flex items-center gap-3">
+                    <button type="button" class="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-3 py-2 shadow-sm hover:shadow-md transition">
+                        <?php if (!empty($_SESSION['avatar'])): ?>
+                            <img src="<?= htmlspecialchars($_SESSION['avatar']) ?>" alt="Avatar" class="w-9 h-9 rounded-full object-cover">
+                        <?php else: ?>
+                            <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-slate-200 text-slate-600">
+                                <span class="material-symbols-outlined">person</span>
+                            </span>
+                        <?php endif; ?>
+                        <span class="text-sm font-medium text-slate-700">Xin chào, <?= htmlspecialchars($_SESSION['fullname'] ?? $_SESSION['username']) ?></span>
+                        <span class="material-symbols-outlined text-slate-500">expand_more</span>
+                    </button>
+                    <div class="absolute right-0 top-full hidden min-w-[200px] rounded-3xl border border-slate-200 bg-white p-3 shadow-xl transition duration-200 group-hover:block">
+                        <a href="index.php?url=profile" class="block rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100">Trang cá nhân</a>
+                        <a href="index.php?url=logout" class="block rounded-2xl px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50">Đăng xuất</a>
+                    </div>
                 </div>
             <?php else: ?>
                 <a href="index.php?url=login" class="hidden md:inline-flex items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
@@ -80,14 +95,14 @@
 <main class="pt-24">
     <section class="relative overflow-hidden min-h-[90vh] scroll-reveal reveal-from-left reveal-delay-100">
         <div class="absolute inset-0">
-            <img src="<?= isset($settings['hero_image']) && $settings['hero_image'] ? htmlspecialchars($settings['hero_image']) : 'uploads/picture1.jfif' ?>?v=<?= time() ?>" alt="Banner" class="w-full h-full object-cover opacity-90">
+            <img src="/<?= isset($settings['hero_image']) && $settings['hero_image'] ? ltrim(htmlspecialchars($settings['hero_image']), '/') : 'uploads/picture1.jfif' ?>?v=<?= time() ?>" alt="Banner" class="w-full h-full object-cover opacity-90">
             <div class="absolute inset-0 bg-gradient-to-br from-slate-950/25 via-slate-950/10 to-slate-950/35"></div>
         </div>
         <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-8 py-24 text-center text-white animate-fade-up animate-delay-200">
             <p class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium tracking-wide text-white/90 shadow-lg shadow-slate-950/20 animate-fade-up animate-delay-300"><?= htmlspecialchars($settings['site_name'] ?? 'CloudJourney') ?> • Khám phá hành trình tuyệt vời</p>
             <h1 class="mt-8 text-4xl md:text-6xl font-extrabold leading-tight animate-fade-up animate-delay-400"><?= htmlspecialchars($settings['hero_title'] ?? 'Khám phá hành trình tuyệt vời của bạn') ?></h1>
             <p class="mt-6 text-base md:text-lg text-white/80 animate-fade-up animate-delay-500">Hành trình trọn vẹn từ khởi hành đến điểm đến, thiết kế riêng cho trải nghiệm du lịch của bạn.</p>
-            <form action="index.php" method="GET" class="mt-14 glass-panel rounded-[2rem] border border-white/70 shadow-2xl p-6 md:p-8 text-left animate-slide-up animate-delay-600">
+            <form action="/index.php" method="GET" class="mt-14 glass-panel rounded-[2rem] border border-white/70 shadow-2xl p-6 md:p-8 text-left animate-slide-up animate-delay-600">
                 <input type="hidden" name="url" value="search">
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5 items-end">
                     <!-- Location -->
@@ -159,6 +174,69 @@
             </form>
         </div>
     </section>
+    <?php if (isset($_SESSION['user_id'])): ?>
+    <section class="max-w-7xl mx-auto px-6 md:px-8 py-10 scroll-reveal reveal-from-bottom reveal-delay-150">
+        <div class="bg-white rounded-[2rem] border border-slate-200 shadow-lg p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Lịch sử đặt tour gần đây</p>
+                    <h2 class="mt-3 text-3xl font-extrabold text-slate-900">Xem nhanh trạng thái đơn hàng của bạn</h2>
+                </div>
+                <a href="index.php?url=profile" class="inline-flex items-center gap-2 rounded-full bg-blue-700 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    Chi tiết lịch sử
+                </a>
+            </div>
+
+            <?php if (!empty($bookings)): ?>
+                <div class="grid gap-4">
+                    <?php foreach ($bookings as $booking): ?>
+                        <?php
+                            $statusLabel = 'Không rõ';
+                            $statusClass = 'bg-slate-100 text-slate-700';
+                            if ($booking['status'] === 'cancelled') {
+                                $statusLabel = 'Đã hủy';
+                                $statusClass = 'bg-red-100 text-red-700';
+                            } elseif ($booking['status'] === 'pending' && $booking['payment_method'] === 'transfer') {
+                                $statusLabel = 'Chờ thanh toán';
+                                $statusClass = 'bg-amber-100 text-amber-700';
+                            } elseif ($booking['status'] === 'pending') {
+                                $statusLabel = 'Chờ xác nhận';
+                                $statusClass = 'bg-yellow-100 text-yellow-700';
+                            } elseif ($booking['status'] === 'confirmed') {
+                                $statusLabel = 'Đã xác nhận';
+                                $statusClass = 'bg-green-100 text-green-700';
+                            }
+                        ?>
+                        <div class="grid gap-4 md:grid-cols-4 items-center rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+                            <div class="md:col-span-2">
+                                <p class="text-sm text-slate-500">Tour đã đăng ký</p>
+                                <h3 class="mt-2 text-lg font-semibold text-slate-900"><?= htmlspecialchars($booking['tour_name'] ?? 'Tour đã bị xóa') ?></h3>
+                                <p class="mt-1 text-sm text-slate-600">Khách: <?= htmlspecialchars($booking['guests']) ?> người</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500">Ngày khởi hành</p>
+                                <p class="mt-1 text-base font-semibold text-slate-900"><?= date('d/m/Y', strtotime($booking['booking_date'] ?? 'now')) ?></p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500">Tổng tiền</p>
+                                <p class="mt-1 text-base font-bold text-orange-600"><?= number_format((float)($booking['total_price'] ?? 0), 0, ',', '.') ?>đ</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold <?= $statusClass ?>"><?= $statusLabel ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="rounded-[1.5rem] border border-dashed border-slate-200 bg-slate-50 p-10 text-center">
+                    <p class="text-slate-500">Bạn chưa có booking mới.</p>
+                    <a href="index.php?url=search" class="inline-flex items-center gap-2 mt-5 rounded-full bg-blue-700 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Khám phá tour ngay</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php endif; ?>
     <section id="destinations" class="max-w-7xl mx-auto px-6 md:px-8 py-24 scroll-reveal reveal-from-right reveal-delay-100">
         <div class="text-center mb-14 animate-fade-up animate-delay-200">
             <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Chuyến đi nổi bật</p>
@@ -167,10 +245,19 @@
         </div>
         <div class="grid gap-8 md:grid-cols-3">
             <?php if (isset($activeTours) && count($activeTours) > 0): ?>
+                <div class="flex items-center justify-between mb-6 col-span-full">
+                    <div>
+                        <p class="text-sm uppercase tracking-[0.3em] text-blue-700 font-semibold">Chuyến đi nổi bật</p>
+                    </div>
+                    <a href="/index.php?url=tour_all&page=1" class="inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-600 transition">
+                        Xem thêm
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
                 <?php foreach ($activeTours as $tour): ?>
                 <article class="tour-card overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_90px_rgba(15,23,42,0.08)] border border-slate-200 animate-slide-up">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="<?= $tour['image_url'] ? '/' . htmlspecialchars($tour['image_url']) : 'uploads/picture1.jfif' ?>" alt="<?= htmlspecialchars($tour['name']) ?>" class="h-full w-full object-cover transition duration-500 hover:scale-105" />
+                        <img src="<?= $tour['image_url'] ? '/' . htmlspecialchars($tour['image_url']) : '/uploads/picture1.jfif' ?>" alt="<?= htmlspecialchars($tour['name']) ?>" class="h-full w-full object-cover transition duration-500 hover:scale-105" />
                         <span class="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-900 shadow-sm"><?= htmlspecialchars($tour['category']) ?></span>
                     </div>
                     <div class="p-6">
@@ -262,11 +349,11 @@
     </section>
     <section class="bg-blue-900 text-white py-24 scroll-reveal reveal-scale reveal-delay-200">
         <div class="max-w-6xl mx-auto px-6 md:px-8 text-center animate-fade-up animate-delay-200">
-            <h2 class="text-4xl md:text-5xl font-extrabold">ăng ký để nhận ưu đãi bí mật</h2>
+            <h2 class="text-4xl md:text-5xl font-extrabold">Đăng ký để nhận ưu đãi bí mật</h2>
             <p class="mt-4 text-slate-200 max-w-2xl mx-auto">Gia nhập cộng đồng hơn 50,000 người yêu du lịch và nhận những deal hấp dẫn nhất trực tiếp vào email của bạn.</p>
             <div class="mt-10 flex flex-col gap-4 sm:flex-row items-center justify-center animate-fade-up animate-delay-300">
-                <input type="email" placeholder="ịa chỉ email của bạn" class="w-full max-w-xl rounded-full border border-white/30 bg-white/10 px-6 py-4 text-white placeholder:text-slate-200 outline-none focus:border-white focus:bg-white/15" />
-                <button class="rounded-full bg-orange-500 px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-white hover:bg-orange-400 transition">ăng ký ngay</button>
+                <input type="email" placeholder="Địa chỉ email của bạn" class="w-full max-w-xl rounded-full border border-white/30 bg-white/10 px-6 py-4 text-white placeholder:text-slate-200 outline-none focus:border-white focus:bg-white/15" />
+                <button class="rounded-full bg-orange-500 px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-white hover:bg-orange-400 transition">Đăng ký ngay</button>
             </div>
         </div>
     </section>

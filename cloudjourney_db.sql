@@ -71,10 +71,19 @@ CREATE TABLE IF NOT EXISTS bookings (
     guests INT NOT NULL DEFAULT 1,
     total_price DECIMAL(12,2) NOT NULL,
     payment_method VARCHAR(50) NOT NULL,
+    departure_location VARCHAR(255) DEFAULT NULL,
+    transport_method VARCHAR(50) DEFAULT NULL,
+    special_requests TEXT DEFAULT NULL,
+    confirmation_message TEXT DEFAULT NULL,
     status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE SET NULL
 );
+
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS departure_location VARCHAR(255) DEFAULT NULL;
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS transport_method VARCHAR(50) DEFAULT NULL;
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS special_requests TEXT DEFAULT NULL;
+ALTER TABLE bookings ADD COLUMN IF NOT EXISTS confirmation_message TEXT DEFAULT NULL;
 
 --
 -- CHÈN DỮ LIỆU MẶC ĐỊNH VÀ DỮ LIỆU MẪU

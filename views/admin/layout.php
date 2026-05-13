@@ -13,10 +13,10 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
             <div class="flex items-center gap-4">
-                <a href="index.php?url=home" class="flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+                <a href="/index.php?url=home" class="flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
                     <span class="material-symbols-outlined text-sm mr-2">home</span> Trang chủ
                 </a>
-                <a href="index.php?url=logout" class="flex items-center px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
+                <a href="/index.php?url=logout" class="flex items-center px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition">
                     <span class="material-symbols-outlined text-sm mr-2">logout</span> Đăng xuất
                 </a>
             </div>
@@ -27,23 +27,32 @@
         <div class="w-64 bg-slate-900 text-white p-6 overflow-y-auto flex-shrink-0">
             <h2 class="text-xl font-bold mb-8">CloudJourney Admin</h2>
             <nav class="space-y-2">     
-                <a href="index.php?url=admin" class="block px-4 py-3 rounded-lg text-sm font-semibold bg-slate-700 text-white">
+                <a href="/index.php?url=admin" class="block px-4 py-3 rounded-lg text-sm font-semibold bg-slate-700 text-white">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">dashboard</span> Dashboard
                 </a>
-                <a href="index.php?url=admin/users" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                <a href="/index.php?url=admin/users" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">people</span> Quản Lý User
                 </a>
-                <a href="index.php?url=admin/news" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                <a href="/index.php?url=admin/tours" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">tour</span> Quản Lý Tour
+                </a>
+                <a href="/index.php?url=admin/bookings" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">inventory_2</span> Quản Lý Đặt Tour
+                </a>
+                <a href="/index.php?url=admin/news" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">article</span> Quản Lý Tin Tức
                 </a>
-                <a href="index.php?url=admin/faqs" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                <a href="/index.php?url=admin/faqs" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">help</span> Quản Lý FAQ
                 </a>
-                <a href="index.php?url=admin/comments" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                <a href="/index.php?url=admin/comments" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">comment</span> Duyệt Bình Luận
                 </a>
-                <a href="index.php?url=admin/ratings" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                <a href="/index.php?url=admin/ratings" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
                     <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">star</span> Quản Lý Đánh Giá
+                </a>
+                <a href="/index.php?url=admin/logs" class="block px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 transition">
+                    <span class="material-symbols-outlined text-sm mr-3" style="display:inline;">receipt_long</span> Nhật ký hệ thống
                 </a>
             </nav>
         </div>

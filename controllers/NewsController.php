@@ -51,7 +51,7 @@ class NewsController {
             ];
 
             $commentModel = new NewsComment($this->db);
-            $commentModel->post_id = $newsModel->id;
+            $commentModel->news_id = $newsModel->id;
             $stmtComments = $commentModel->getByNewsId();
             $comments = $stmtComments->fetchAll(PDO::FETCH_ASSOC);
 

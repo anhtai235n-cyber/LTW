@@ -14,7 +14,7 @@ class ProfileController {
     public function index() {
         // Kiểm tra user đã đăng nhập chưa
         if(!isset($_SESSION['user_id'])) {
-            header("Location: ?url=login");
+            header("Location: /index.php?url=login");
             exit;
         }
 
@@ -51,7 +51,7 @@ class ProfileController {
             $pageTitle = "Hồ Sơ Của Tôi";
             require_once 'views/profile/index.php';
         } else {
-            header("Location: ?url=home");
+            header("Location: /index.php?url=home");
             exit;
         }
     }
@@ -59,7 +59,7 @@ class ProfileController {
     public function update() {
         // Kiểm tra user đã đăng nhập chưa
         if(!isset($_SESSION['user_id'])) {
-            header("Location: ?url=login");
+            header("Location: /index.php?url=login");
             exit;
         }
 
@@ -92,7 +92,7 @@ class ProfileController {
                 $_SESSION['profile_error'] = "Lỗi khi cập nhật hồ sơ!";
             }
 
-            header("Location: ?url=profile");
+            header("Location: /index.php?url=profile");
             exit;
         } else {
             // GET request - hiển thị form
@@ -118,7 +118,7 @@ class ProfileController {
                 $pageTitle = "Chỉnh Sửa Hồ Sơ";
                 require_once 'views/profile/update.php';
             } else {
-                header("Location: ?url=home");
+                header("Location: /index.php?url=home");
                 exit;
             }
         }
@@ -127,7 +127,7 @@ class ProfileController {
     public function changePassword() {
         // Kiểm tra user đã đăng nhập chưa
         if(!isset($_SESSION['user_id'])) {
-            header("Location: ?url=login");
+            header("Location: /index.php?url=login");
             exit;
         }
 
@@ -150,7 +150,7 @@ class ProfileController {
                 $_SESSION['password_error'] = "Mật khẩu cũ không chính xác!";
             }
 
-            header("Location: ?url=profile");
+            header("Location: /index.php?url=profile");
             exit;
         } else {
             // GET request - hiển thị form
@@ -176,7 +176,7 @@ class ProfileController {
                 $pageTitle = "Đổi Mật Khẩu";
                 require_once 'views/profile/changePassword.php';
             } else {
-                header("Location: ?url=home");
+                header("Location: /index.php?url=home");
                 exit;
             }
         }
@@ -185,7 +185,7 @@ class ProfileController {
     public function paymentInfo() {
         // Kiểm tra user đã đăng nhập chưa
         if(!isset($_SESSION['user_id'])) {
-            header("Location: ?url=login");
+            header("Location: /index.php?url=login");
             exit;
         }
 
@@ -196,7 +196,7 @@ class ProfileController {
             // Ví dụ: card_number, expiry_date, card_holder, etc.
             // Hiện tại chỉ lưu placeholder
             $_SESSION['payment_success'] = "Thông tin thanh toán đã được cập nhật!";
-            header("Location: ?url=profile/payment");
+            header("Location: /index.php?url=profile/paymentInfo");
             exit;
         } else {
             $userModel = new User($this->db);
@@ -221,7 +221,7 @@ class ProfileController {
                 $pageTitle = "Thông Tin Thanh Toán";
                 require_once 'views/profile/paymentInfo.php';
             } else {
-                header("Location: ?url=home");
+                header("Location: /index.php?url=home");
                 exit;
             }
         }

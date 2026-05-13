@@ -2,6 +2,7 @@
 require_once 'config/database.php';
 require_once 'models/Setting.php';
 require_once 'models/Tour.php';
+require_once 'models/Booking.php';
 
 class HomeController {
     private $db;
@@ -34,6 +35,20 @@ class HomeController {
         
         // Fetch price range for search form
         $priceRange = $tourModel->getPriceRange();
+
+        $bookings = [];
+        if (isset($_SESSION['user_id']) && !empty($_SESSION['email'])) {
+            $bookingModel = new Booking($this->db);
+            $query = "SELECT b.*, t.name as tour_name FROM bookings b
+                      LEFT JOIN tours t ON b.tour_id = t.id
+                      WHERE b.customer_email = ?
+                      ORDER BY b.created_at DESC
+                      LIMIT 5";
+            $stmtBooking = $this->db->prepare($query);
+            $stmtBooking->bindParam(1, $_SESSION['email']);
+            $stmtBooking->execute();
+            $bookings = $stmtBooking->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         $pageTitle = $settings['site_name'] ?? 'CloudJourney';
         require_once 'views/home/index.php';

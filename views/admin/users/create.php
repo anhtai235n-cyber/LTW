@@ -5,7 +5,7 @@
             <h1 class="text-3xl font-bold text-on-surface">Tạo Tài khoản Admin mới</h1>
             <p class="text-on-surface-variant mt-2">Nhập thông tin để tạo một tài khoản quản trị viên mới</p>
         </div>
-        <a href="/admin/users" class="flex items-center gap-2 px-6 py-3 text-primary hover:bg-primary-container rounded-xl font-bold transition-colors">
+        <a href="/index.php?url=admin/users" class="flex items-center gap-2 px-6 py-3 text-primary hover:bg-primary-container rounded-xl font-bold transition-colors">
             <span class="material-symbols-outlined">arrow_back</span>
             <span>Quay lại</span>
         </a>
@@ -20,7 +20,7 @@
 
     <!-- Form tạo admin -->
     <div class="bg-white rounded-xl shadow-md p-8 max-w-2xl">
-        <form action="/admin/users/store" method="POST" class="space-y-6">
+        <form action="/index.php?url=admin/users/store" method="POST" class="space-y-6">
             <!-- Tên đăng nhập -->
             <div>
                 <label class="block text-sm font-bold text-on-surface mb-2">Tên đăng nhập <span class="text-red-500">*</span></label>
@@ -93,7 +93,7 @@
                     Tạo Admin
                 </button>
                 <a 
-                    href="/admin/users" 
+                    href="/index.php?url=admin/users" 
                     class="flex-1 py-3 bg-surface-container text-on-surface rounded-xl font-bold hover:bg-surface-container text-center transition-colors"
                 >
                     <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">close</span>
@@ -117,3 +117,4 @@
         </ul>
     </div>
 </div>
+

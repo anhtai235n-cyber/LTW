@@ -2,6 +2,7 @@
 require_once 'config/database.php';
 require_once 'config/Validator.php';
 require_once 'config/CsrfToken.php';
+require_once 'config/Logger.php';
 require_once 'models/User.php';
 require_once 'models/Tour.php';
 require_once 'models/Contact.php';
@@ -269,7 +270,7 @@ class AdminController
             $contactModel->status = $_POST['status'];
 
             if ($contactModel->updateStatus()) {
-                header("Location: /admin/contact");
+                header("Location: /index.php?url=admin/contact");
                 exit;
             } else {
                 echo "Lỗi cập nhật trạng thái liên hệ!";
@@ -284,7 +285,7 @@ class AdminController
             $contactModel->id = $_GET['id'];
 
             if ($contactModel->delete()) {
-                header("Location: /admin/contact");
+                header("Location: /index.php?url=admin/contact");
                 exit;
             } else {
                 echo "Lỗi khi xoá liên hệ!";
@@ -334,7 +335,7 @@ class AdminController
                 $_SESSION['setting_error'] = "Đã có lỗi xảy ra khi cập nhật!";
             }
 
-            header("Location: /admin/setting");
+            header("Location: /index.php?url=admin/setting");
             exit;
         }
     }
@@ -356,16 +357,58 @@ class AdminController
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST['status'])) {
             $bookingModel = new Booking($this->db);
             $bookingModel->id = $_POST['id'];
+
+            if (!$bookingModel->readOne()) {
+                echo "Không tìm thấy đơn đặt tour.";
+                return;
+            }
+
             $bookingModel->status = $_POST['status'];
+            $confirmationMessage = null;
+
+            if ($bookingModel->status === 'confirmed') {
+                $confirmationMessage = sprintf(
+                    "Đơn #%s đã được xác nhận. Khởi hành từ: %s. Phương thức di chuyển: %s.%s",
+                    $bookingModel->id,
+                    $bookingModel->departure_location ?: 'Chưa xác định',
+                    $bookingModel->transport_method ?: 'Chưa xác định',
+                    $bookingModel->special_requests ? ' Yêu cầu: ' . $bookingModel->special_requests : ''
+                );
+            } elseif ($bookingModel->status === 'cancelled') {
+                $confirmationMessage = sprintf(
+                    "Đơn #%s đã bị hủy bởi admin. Khách hàng: %s (%s).",
+                    $bookingModel->id,
+                    $bookingModel->customer_name,
+                    $bookingModel->customer_email
+                );
+            }
+
+            $bookingModel->confirmation_message = $confirmationMessage;
 
             if ($bookingModel->updateStatus()) {
-                header("Location: /admin/bookings");
+                Logger::info("Booking status updated: id={$bookingModel->id}, status={$bookingModel->status}");
+                header("Location: /index.php?url=admin/bookings");
                 exit;
             } else {
                 echo "Lỗi cập nhật trạng thái đơn đặt tour!";
             }
         }
     }
+
+    public function logs()
+    {
+        $logPath = dirname(__DIR__) . '/logs/app.log';
+        $logs = [];
+        if (file_exists($logPath)) {
+            $lines = file($logPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            $logs = array_reverse($lines);
+        }
+
+        $pageTitle = "Nhật ký hệ thống";
+        $contentView = "views/admin/logs/index.php";
+        require_once 'views/admin/layout.php';
+    }
+
     // ===================== QUẢN LÝ NGƯỜI DÙNG =====================
     public function users()
     {
@@ -414,7 +457,7 @@ class AdminController
 
             if ($userModel->createAdmin()) {
                 $_SESSION['success'] = "Tạo tài khoản admin thành công!";
-                header("Location: /admin/users");
+                header("Location: /index.php?url=admin/users");
                 exit;
             } else {
                 $error = "Tên đăng nhập hoặc email đã tồn tại!";
@@ -436,7 +479,7 @@ class AdminController
                 $_SESSION['success'] = "Nâng cấp thành admin thành công!";
             }
         }
-        header("Location: /admin/users");
+        header("Location: /index.php?url=admin/users");
         exit;
     }
 
@@ -451,7 +494,7 @@ class AdminController
                 $_SESSION['success'] = "Hạ xuống member thành công!";
             }
         }
-        header("Location: /admin/users");
+        header("Location: /index.php?url=admin/users");
         exit;
     }
 
@@ -466,7 +509,7 @@ class AdminController
                 $_SESSION['success'] = "Khóa tài khoản thành công!";
             }
         }
-        header("Location: /admin/users");
+        header("Location: /index.php?url=admin/users");
         exit;
     }
 
@@ -481,7 +524,7 @@ class AdminController
                 $_SESSION['success'] = "Mở khóa tài khoản thành công!";
             }
         }
-        header("Location: /admin/users");
+        header("Location: /index.php?url=admin/users");
         exit;
     }
 
@@ -496,7 +539,7 @@ class AdminController
                 $_SESSION['success'] = "Xóa tài khoản thành công!";
             }
         }
-        header("Location: /admin/users");
+        header("Location: /index.php?url=admin/users");
         exit;
     }
 
@@ -593,7 +636,7 @@ class AdminController
     public function news_edit()
     {
         if (!isset($_GET['id'])) {
-            header("Location: /admin/news");
+            header("Location: /index.php?url=admin/news");
             exit;
         }
 
@@ -624,7 +667,7 @@ class AdminController
     public function news_update()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['id'])) {
-            header("Location: /admin/news");
+            header("Location: /index.php?url=admin/news");
             exit;
         }
 
@@ -665,7 +708,7 @@ class AdminController
     public function news_delete()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['news_id'])) {
-            header("Location: /admin/news");
+            header("Location: /index.php?url=admin/news");
             exit;
         }
 
@@ -696,7 +739,7 @@ class AdminController
     public function comments_approve()
     {
         if (!isset($_POST['comment_id'])) {
-            header("Location: /admin/comments");
+            header("Location: /index.php?url=admin/comments");
             exit;
         }
 
@@ -715,7 +758,7 @@ class AdminController
     public function comments_reject()
     {
         if (!isset($_POST['comment_id'])) {
-            header("Location: /admin/comments");
+            header("Location: /index.php?url=admin/comments");
             exit;
         }
 
@@ -734,7 +777,7 @@ class AdminController
     public function comments_delete()
     {
         if (!isset($_POST['comment_id'])) {
-            header("Location: /admin/comments");
+            header("Location: /index.php?url=admin/comments");
             exit;
         }
 

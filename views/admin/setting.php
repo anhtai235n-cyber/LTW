@@ -21,7 +21,7 @@
 <?php endif; ?>
 
 <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm">
-    <form action="/admin/setting_update" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="/index.php?url=admin/setting_update" method="POST" enctype="multipart/form-data" class="space-y-6">
         
         <h3 class="text-xl font-bold text-on-surface mb-4">Thông tin Website</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -3,6 +3,7 @@ require_once 'models/User.php';
 require_once 'config/database.php';
 require_once 'config/Validator.php';
 require_once 'config/CsrfToken.php';
+require_once 'config/Logger.php';
 
 class AuthController {
     private $db;
@@ -17,9 +18,9 @@ class AuthController {
         // Nếu đã đăng nhập thì đẩy về trang chủ hoặc admin tùy role
         if (isset($_SESSION['user_id'])) {
             if ($_SESSION['user_role'] == 'admin') {
-                header("Location: /admin/index");
+                header("Location: /index.php?url=admin");
             } else {
-                header("Location: /home");
+                header("Location: /index.php?url=home");
             }
             exit;
         }
@@ -55,15 +56,18 @@ class AuthController {
             if ($result == "success") {
                 $_SESSION['user_id'] = $userModel->id;
                 $_SESSION['username'] = $userModel->username;
+                $_SESSION['email'] = $userModel->email;
                 $_SESSION['fullname'] = $userModel->fullname;
                 $_SESSION['user_role'] = $userModel->role;
                 $_SESSION['avatar'] = $userModel->avatar;
                 CsrfToken::destroy();
 
                 if ($userModel->role == 'admin') {
-                    header("Location: index.php?url=admin");
+                    Logger::info("Admin logged in: {$userModel->username}");
+                    header("Location: /index.php?url=admin");
                 } else {
-                    header("Location: index.php?url=home");
+                    Logger::info("User logged in: {$userModel->username}");
+                    header("Location: /index.php?url=home");
                 }
                 exit;
             } elseif ($result == "banned") {
@@ -83,7 +87,7 @@ class AuthController {
     // Hiển thị form đăng ký
     public function register_form() {
         if (isset($_SESSION['user_id'])) {
-            header("Location: /home");
+            header("Location: /index.php?url=home");
             exit;
         }
         $pageTitle = "Đăng ký";
@@ -137,9 +141,10 @@ class AuthController {
     // Đăng xuất
     public function logout() {
         // Hủy toàn bộ session
+        Logger::info("User logged out: " . ($_SESSION['username'] ?? 'guest'));
         session_unset();
         session_destroy();
-        header("Location: index.php?url=home");
+        header("Location: /index.php?url=home");
         exit;
     }
 }
