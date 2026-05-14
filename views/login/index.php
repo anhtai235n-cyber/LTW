@@ -39,7 +39,10 @@
                 <input type="text" name="username" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="Nhập username">
             </div>
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2">Mật khẩu</label>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-sm font-bold text-gray-700">Mật khẩu</label>
+                    <a href="#forgot-password" class="text-xs text-blue-600 hover:text-blue-700 font-semibold">Quên mật khẩu?</a>
+                </div>
                 <input type="password" name="password" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="••••••••">
             </div>
             <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors shadow-md">Đăng nhập</button>
@@ -49,6 +52,46 @@
             Chưa có tài khoản? <a href="/register" class="text-blue-600 font-bold hover:underline">Đăng ký ngay</a>
         </p>
     </div>
+
+    <!-- Modal Quên mật khẩu -->
+    <div id="forgot-password" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onclick="if(event.target === this) this.classList.add('hidden')">
+        <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md scroll-reveal reveal-scale reveal-delay-150" onclick="event.stopPropagation()">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-extrabold text-blue-900">Quên mật khẩu</h2>
+                <p class="text-gray-500 mt-2 text-sm">Nhập email của bạn để nhận hướng dẫn đặt lại mật khẩu</p>
+            </div>
+
+            <form action="index.php?url=forgot-password" method="POST" class="space-y-6">
+                <?php echo CsrfToken::field(); ?>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="you@example.com">
+                </div>
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors shadow-md">Gửi hướng dẫn</button>
+            </form>
+
+            <p class="text-center text-sm text-gray-500 mt-6">
+                <a href="#" class="text-blue-600 font-bold hover:underline" onclick="document.getElementById('forgot-password').classList.add('hidden'); return false;">Quay lại đăng nhập</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Mở modal quên mật khẩu
+        document.querySelectorAll('a[href="#forgot-password"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('forgot-password').classList.remove('hidden');
+            });
+        });
+
+        // Đóng modal khi nhấn ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('forgot-password').classList.add('hidden');
+            }
+        });
+    </script>
     <script defer src="/public/js/scrollAnimations.js"></script>
 </body>
 </html>

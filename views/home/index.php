@@ -87,6 +87,9 @@
                     </div>
                 </div>
             <?php else: ?>
+                <a href="index.php?url=login" class="md:hidden inline-flex items-center justify-center rounded-full bg-blue-700 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-800 transition">
+                    <span class="material-symbols-outlined">login</span>
+                </a>
                 <a href="index.php?url=login" class="hidden md:inline-flex items-center justify-center rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800 transition">Đăng nhập</a>
             <?php endif; ?>
         </div>
